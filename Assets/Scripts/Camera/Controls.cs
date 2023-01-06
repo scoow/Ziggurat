@@ -46,6 +46,15 @@ namespace Ziggurat
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""cbd4c104-4385-48a2-b8c2-7aafbeba58ae"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ namespace Ziggurat
                     ""action"": ""Scale"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d1e44ca-61c9-404a-a993-6018b8980306"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -124,6 +144,7 @@ namespace Ziggurat
             m_CameraActionMap = asset.FindActionMap("CameraActionMap", throwIfNotFound: true);
             m_CameraActionMap_WASD = m_CameraActionMap.FindAction("WASD", throwIfNotFound: true);
             m_CameraActionMap_Scale = m_CameraActionMap.FindAction("Scale", throwIfNotFound: true);
+            m_CameraActionMap_Rotate = m_CameraActionMap.FindAction("Rotate", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -185,12 +206,14 @@ namespace Ziggurat
         private ICameraActionMapActions m_CameraActionMapActionsCallbackInterface;
         private readonly InputAction m_CameraActionMap_WASD;
         private readonly InputAction m_CameraActionMap_Scale;
+        private readonly InputAction m_CameraActionMap_Rotate;
         public struct CameraActionMapActions
         {
             private @Controls m_Wrapper;
             public CameraActionMapActions(@Controls wrapper) { m_Wrapper = wrapper; }
             public InputAction @WASD => m_Wrapper.m_CameraActionMap_WASD;
             public InputAction @Scale => m_Wrapper.m_CameraActionMap_Scale;
+            public InputAction @Rotate => m_Wrapper.m_CameraActionMap_Rotate;
             public InputActionMap Get() { return m_Wrapper.m_CameraActionMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -206,6 +229,9 @@ namespace Ziggurat
                     @Scale.started -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnScale;
                     @Scale.performed -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnScale;
                     @Scale.canceled -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnScale;
+                    @Rotate.started -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnRotate;
+                    @Rotate.performed -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnRotate;
+                    @Rotate.canceled -= m_Wrapper.m_CameraActionMapActionsCallbackInterface.OnRotate;
                 }
                 m_Wrapper.m_CameraActionMapActionsCallbackInterface = instance;
                 if (instance != null)
@@ -216,6 +242,9 @@ namespace Ziggurat
                     @Scale.started += instance.OnScale;
                     @Scale.performed += instance.OnScale;
                     @Scale.canceled += instance.OnScale;
+                    @Rotate.started += instance.OnRotate;
+                    @Rotate.performed += instance.OnRotate;
+                    @Rotate.canceled += instance.OnRotate;
                 }
             }
         }
@@ -224,6 +253,7 @@ namespace Ziggurat
         {
             void OnWASD(InputAction.CallbackContext context);
             void OnScale(InputAction.CallbackContext context);
+            void OnRotate(InputAction.CallbackContext context);
         }
     }
 }

@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEngine.InputSystem.InputAction;
 
 namespace Ziggurat
 {
@@ -21,37 +19,36 @@ namespace Ziggurat
             _controls.CameraActionMap.WASD.canceled += callbackContext => CancelMove();
 
             _controls.CameraActionMap.Scale.performed += callbackContext => SetScale(callbackContext.ReadValue<float>());
+            _controls.CameraActionMap.Rotate.performed += callbackContext => Rotate(callbackContext.ReadValue<float>());
         }
-
         private void CancelMove()
         {
             _movementVector = Vector2.zero;
         }
-
-        private void OnDisable()
-        {
-            _controls.Disable();
-        }
-
         private void SetMovement(Vector2 movement)
         {
             _movementVector = new Vector3(movement.x, 0f, movement.y);
         }
-
         private void SetScale(float scale)
         {
             _movementVector = new Vector3(0f, scale, 0f);
         }
-
+        private void Rotate(float angle)
+        {
+            transform.Rotate(Time.deltaTime * _speed * new Vector3(0f, angle, 0f));
+        }
 
         private void Move()
         {
             transform.Translate(Time.deltaTime * _speed * _movementVector);
         }
-
         private void Update()
         {
             Move();
+        }
+        private void OnDisable()
+        {
+            _controls.Disable();
         }
     }
 }

@@ -2,35 +2,40 @@ using UnityEngine;
 
 namespace Ziggurat
 {
-    public class BaseUnitsStats : ScriptableObject
+    [CreateAssetMenu(fileName = "New Configuration", menuName = "UnitStats")]
+    public class UnitsStats : ScriptableObject
     {
+        /// <summary>
+        /// тип юнита
+        /// </summary>
+        private UnitType _unitType;
         /// <summary>
         /// здоровье
         /// </summary>
-        public float Health { get; set; }
+        private float _health;
         /// <summary>
         /// скорость перемещения
         /// </summary>
-        public float MovementSpeed { get; set; }
+        private float _movementSpeed;
         /// <summary>
         /// урон от слабой атаки
         /// </summary>
-        public float FastAttackDamage { get; set; }
+        private float _fastAttackDamage;
         /// <summary>
         /// урон от медленной атаки
         /// </summary>
-        public float StrongAttackDamage { get; set; }
+        private float _strongAttackDamage;
         /// <summary>
         /// вероятность промаха
         /// </summary>
-        public float MissChance { get; set; }
+        private float _missChance;
         /// <summary>
         /// вероятность двукратного урона
         /// </summary>
-        public float CritChance { get; set; }
+        private float _critChance;
         /// <summary>
         /// процентное соотношение вероятности слабой и сильной атак
         /// </summary>
-        public float FastOrStrongAttackChance { get; set; }
+        private float _fastOrStrongAttackChance;
     }
 }

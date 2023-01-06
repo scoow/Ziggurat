@@ -8,7 +8,8 @@ namespace Ziggurat
     {
         public static GameManager instance;
 
-        public Dictionary<UnitType, UnitPool> _enemyPool = new();
+        public Dictionary<UnitType, UnitPool> _unitPool = new();
+        public Transform _unitsContainer;
 
         private void Awake()
         {
@@ -16,14 +17,15 @@ namespace Ziggurat
         }
         private void Start()
         {
+            _unitsContainer = FindObjectOfType<UnitsContainer>().transform;
             InitUnitsPools();
         }
 
         private void InitUnitsPools()
         {
-           /* _enemyPool.Add(EnemyType.Simple, new(Resources.Load<SimpleEnemy>("Prefabs/SimpleEnemy"), _enemyContainer.transform, 5));
-            _enemyPool.Add(EnemyType.Big, new(Resources.Load<BigEnemy>("Prefabs/BigEnemy"), _enemyContainer.transform, 2));*/
+            _unitPool.Add(UnitType.Blue, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer, 5));
+            _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer, 5));
+            _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer, 5));
         }
-
     }
 }

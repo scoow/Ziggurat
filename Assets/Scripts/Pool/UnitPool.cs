@@ -9,26 +9,21 @@ namespace Ziggurat
             Init(count);
         }
 
-        public override void Init(int count)
+/*        public override void Init(int count)
         {
             for (int i = 0; i < count; i++)
             {
                 PoolUp(true);
             }
-        }
+        }*/
 
+        protected override Unit GetCreated() => Object.Instantiate(_prefab); //todo исправить
 
-        protected override Unit GetCreated()
-        {
-            return Object.Instantiate(_prefab, RandomSpawn(), Quaternion.identity);
-        }
-
-
-        protected Vector3 RandomSpawn()
+/*        protected Vector3 RandomSpawn()
         {
             float x = Random.Range(-50, 50);
             float z = Random.Range(-50, 50);
             return new Vector3(x, 2, z);
-        }
+        }*/
     }
 }
