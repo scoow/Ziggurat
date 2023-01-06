@@ -24,7 +24,7 @@ namespace Ziggurat
             }
         }
 
-        public T GetAviableOrCreateNew()
+        public T GetAviableOrCreateNew(Transform spawnPoint)
         {
             T result = _elements.Find(element => element.gameObject.activeSelf == false);
             if (result == null)
@@ -32,6 +32,7 @@ namespace Ziggurat
             else
                 result.gameObject.SetActive(true);
 
+            result.transform.position = spawnPoint.position;
             return result;
         }
 

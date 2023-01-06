@@ -37,5 +37,10 @@ namespace Ziggurat
         /// процентное соотношение вероятности слабой и сильной атак
         /// </summary>
         private float _fastOrStrongAttackChance;
+
+        public UnitsStats GetStats()
+        {
+            return null;//todo
+        }
     }
 }

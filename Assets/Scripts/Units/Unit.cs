@@ -4,6 +4,6 @@ namespace Ziggurat
 {
     public class Unit : MonoBehaviour
     {
-        //private UnitsStats _stats;
+        private UnitsStats _stats;
     }
 }

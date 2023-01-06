@@ -18,12 +18,5 @@ namespace Ziggurat
         }*/
 
         protected override Unit GetCreated() => Object.Instantiate(_prefab); //todo исправить
-
-/*        protected Vector3 RandomSpawn()
-        {
-            float x = Random.Range(-50, 50);
-            float z = Random.Range(-50, 50);
-            return new Vector3(x, 2, z);
-        }*/
     }
 }

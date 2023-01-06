@@ -5,7 +5,7 @@ namespace Ziggurat
     public class UnitMovement : MonoBehaviour
     {
         // Положение точки назначения
-        public Transform goal;
+        public Transform target;
 
         private UnitEnvironment _unitEnvironment;
 
@@ -16,7 +16,8 @@ namespace Ziggurat
         {
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             // Указаие точки назначения
-            agent.destination = goal.position;
+            target = FindObjectOfType<UnitsContainer>().transform;
+            agent.destination = target.position;
             _unitEnvironment = GetComponent<UnitEnvironment>();
         }
         private void Update() //todo анимация при ходьбе

@@ -4,10 +4,17 @@ namespace Ziggurat
 {
     public class UnitSpawner : MonoBehaviour
     {
-        //public UnitType SpawnerType { get; private set; }
+        [SerializeField]
+        private UnitType _spawnetType;
+        public UnitType SpawnerType => _spawnetType;
         private UnitsStats _stats;
 
-        private float _respawnCollDown;
+        private float _respawnCoolDown;
+
+        private void SpawnUnit()
+        {
+            //todo
+        }
     }
 
 }
