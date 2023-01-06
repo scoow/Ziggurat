@@ -16,10 +16,10 @@ namespace Ziggurat
         }
         private void Start()
         {
-            InitEnemyPools();
+            InitUnitsPools();
         }
 
-        private void InitEnemyPools()
+        private void InitUnitsPools()
         {
            /* _enemyPool.Add(EnemyType.Simple, new(Resources.Load<SimpleEnemy>("Prefabs/SimpleEnemy"), _enemyContainer.transform, 5));
             _enemyPool.Add(EnemyType.Big, new(Resources.Load<BigEnemy>("Prefabs/BigEnemy"), _enemyContainer.transform, 2));*/

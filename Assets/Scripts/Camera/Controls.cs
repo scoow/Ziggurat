@@ -52,7 +52,7 @@ namespace Ziggurat
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""f62e61f9-e7bb-400c-bbb2-cb8e141a27d4"",
-                    ""path"": ""2DVector(mode=1)"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
