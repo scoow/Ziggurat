@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace Ziggurat
 {
@@ -8,8 +9,8 @@ namespace Ziggurat
         private Vector3 _movementVector = Vector3.zero;
         private Controls _controls;
 
+        [SerializeField]
         private float _speed = 10;
-        private float _maxSpeed = 12;
 
         private void OnEnable()
         {
@@ -18,6 +19,8 @@ namespace Ziggurat
 
             _controls.CameraActionMap.WASD.performed += callbackContext => SetMovement(callbackContext.ReadValue<Vector2>());
             _controls.CameraActionMap.WASD.canceled += callbackContext => CancelMove();
+
+            _controls.CameraActionMap.Scale.performed += callbackContext => SetScale(callbackContext.ReadValue<float>());
         }
 
         private void CancelMove()
@@ -33,9 +36,13 @@ namespace Ziggurat
         private void SetMovement(Vector2 movement)
         {
             _movementVector = new Vector3(movement.x, 0f, movement.y);
-            /*if (_movementVector.magnitude > _maxSpeed)
-                _movementVector *= 0.8f;*/
         }
+
+        private void SetScale(float scale)
+        {
+            _movementVector = new Vector3(0f, scale, 0f);
+        }
+
 
         private void Move()
         {

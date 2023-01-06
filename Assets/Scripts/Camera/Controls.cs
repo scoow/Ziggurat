@@ -40,7 +40,7 @@ namespace Ziggurat
                 },
                 {
                     ""name"": ""Scale"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""f46b5ca2-aa4d-4275-a2f8-465dcc20006c"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
@@ -107,7 +107,7 @@ namespace Ziggurat
                 {
                     ""name"": """",
                     ""id"": ""98450cce-d4e7-49b0-9e91-e7a7c2fdeeb8"",
-                    ""path"": ""<Mouse>/scroll/x"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
