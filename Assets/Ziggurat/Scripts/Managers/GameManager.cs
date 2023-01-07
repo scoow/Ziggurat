@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 //using Zenject;
 
@@ -9,9 +7,10 @@ namespace Ziggurat
     {
         public static GameManager instance;
 
-        private SpawnAssistant _spawnAssistant;
+        public SpawnAssistant _spawnAssistant;
+        public ConfigurationAssistant _configurationAssistant;
+        public AIAssistant _aiAssistant;//
 
-        private List<UnitsStats> _unitsStats = new();//
 
         private void Awake()
         {
@@ -19,9 +18,9 @@ namespace Ziggurat
         }
         private void Start()
         {
-
+            _spawnAssistant = GetComponent<SpawnAssistant>();
+            _configurationAssistant = GetComponent<ConfigurationAssistant>();
+            _aiAssistant = GetComponent<AIAssistant>();
         }
-
-
     }
 }

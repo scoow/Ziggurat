@@ -35,7 +35,6 @@ namespace Ziggurat
             result.transform.position = spawnPoint.position;
             return result;
         }
-
         protected abstract T GetCreated();
 
         protected T PoolUp(bool isActive)

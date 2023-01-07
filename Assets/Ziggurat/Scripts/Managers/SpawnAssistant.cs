@@ -6,7 +6,13 @@ namespace Ziggurat
 {
     public class SpawnAssistant : MonoBehaviour
     {
+        /// <summary>
+        /// Пул юнитов, разделенных по типу
+        /// </summary>
         public Dictionary<UnitType, UnitPool> _unitPool = new();
+        /// <summary>
+        /// Родительский Transform для хранения юнитов
+        /// </summary>
         public Transform _unitsContainer;
 
         private List<UnitSpawner> _unitSpawners = new();
@@ -25,13 +31,14 @@ namespace Ziggurat
 
             InitUnitsPools();
         }
-
+        /// <summary>
+        /// Инициализация пула юнитов
+        /// </summary>
         private void InitUnitsPools()
         {
-            _unitPool.Add(UnitType.Blue, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_blue"), _unitsContainer));
-            _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_green"), _unitsContainer));
-            _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_red"), _unitsContainer));
-
+            _unitPool.Add(UnitType.Blue, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_blue"), UnitType.Blue, _unitsContainer));
+            _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_green"), UnitType.Green, _unitsContainer));
+            _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_red"), UnitType.Red, _unitsContainer));
         }
         private void Update()
         {

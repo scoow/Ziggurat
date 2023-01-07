@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Ziggurat
@@ -6,9 +8,13 @@ namespace Ziggurat
     {
         // ѕоложение точки назначени€
         public Transform target;
+        /// <summary>
+        /// ƒальность взгл€да (обнаружени€)
+        /// </summary>
+
 
         [SerializeField]
-        private float _sightDistance = 5;
+        //private float _attackDistance = 2;
 
         private UnitEnvironment _unitEnvironment;
 
@@ -19,16 +25,27 @@ namespace Ziggurat
         {
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             // ”казаие точки назначени€
-            target = FindObjectOfType<UnitsContainer>().transform;//todo сделать настраиваемый RallyPoint
-            agent.destination = target.position;
+/*            target = FindObjectOfType<UnitsContainer>().transform;//todo сделать настраиваемый RallyPoint
+                                                                  //target = FindNearestTarget();
+
+            SetTarget(target);*/
+
+
+            //agent.destination = target.position;
             _unitEnvironment = GetComponent<UnitEnvironment>();
+            // StartCoroutine(WaitAndSeek(5));
         }
+
+        public void SetTarget(Transform target)
+        {
+            agent.destination = target.position;
+        }
+
         private void Update() //todo анимаци€ при ходьбе
         {
             if (agent.velocity.magnitude > 1)
             {
                 _unitEnvironment.Moving(agent.speed);
-                //Debug.Log("Moving");
             }
             else
             {
@@ -37,14 +54,6 @@ namespace Ziggurat
             }
         }
 
-        private bool CheckDistance(Vector3 target)//
-        {
-            return (this.transform.position + target).magnitude < _sightDistance;
-        }
-
-        private Transform FindNearestTarget()//todo вынести в другой класс
-        {
-            return null;
-        }
+/*        */
     }
 }
