@@ -1884,6 +1884,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitsContainer: {fileID: 1867097315}
+  _redUnitMaterial: {fileID: 2100000, guid: 8f8b1a768b9255342875ac60eab722cf, type: 2}
+  _greenUnitMaterial: {fileID: 2100000, guid: 9dbc876e8ef9b834ca00001ed15e52d4, type: 2}
+  _blueUnitMaterial: {fileID: 2100000, guid: ed770a52d6a86f94b8855413440c8c4c, type: 2}
 --- !u!4 &600153040
 Transform:
   m_ObjectHideFlags: 0

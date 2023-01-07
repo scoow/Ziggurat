@@ -17,6 +17,15 @@ namespace Ziggurat
         private Transform _greenUnitSpawner;
         private Transform _redUnitSpawner;
 
+        [SerializeField]
+        private Material _redUnitMaterial;
+        [SerializeField]
+        private Material _greenUnitMaterial;
+        [SerializeField]
+        public Material _blueUnitMaterial;
+
+        private List<UnitsStats> _unitsStats = new();//
+
         private void Awake()
         {
             instance = this;
@@ -35,21 +44,22 @@ namespace Ziggurat
 
         private void InitUnitsPools()
         {
-            _unitPool.Add(UnitType.Blue, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer));
-            _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer));
-            _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav"), _unitsContainer));
+            _unitPool.Add(UnitType.Blue, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_blue"), _unitsContainer));
+            _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_green"), _unitsContainer));
+            _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_red"), _unitsContainer));
+
         }
         private void Update()
         {
-            if (Input.GetKeyDown("1"))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _unitPool[UnitType.Blue].GetAviableOrCreateNew(_blueUnitSpawner);
             }
-            if (Input.GetKeyDown("2"))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 _unitPool[UnitType.Green].GetAviableOrCreateNew(_greenUnitSpawner);
             }
-            if (Input.GetKeyDown("3"))
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 _unitPool[UnitType.Red].GetAviableOrCreateNew(_redUnitSpawner);
             }

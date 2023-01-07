@@ -40,7 +40,16 @@ namespace Ziggurat
 
         public UnitsStats GetStats()
         {
-            return null;//todo
+            UnitsStats result = new UnitsStats();
+            result._unitType= _unitType;
+            result._health= _health;
+            result._movementSpeed= _movementSpeed;
+            result._fastAttackDamage= _fastAttackDamage;
+            result._strongAttackDamage= _strongAttackDamage;
+            result._missChance= _missChance;
+            result._critChance= _critChance;
+            result._fastOrStrongAttackChance = _fastOrStrongAttackChance;
+            return result;
         }
     }
 }

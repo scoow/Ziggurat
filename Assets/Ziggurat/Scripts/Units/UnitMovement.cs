@@ -16,7 +16,7 @@ namespace Ziggurat
         {
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             // Указаие точки назначения
-            target = FindObjectOfType<UnitsContainer>().transform;
+            target = FindObjectOfType<UnitsContainer>().transform;//todo сделать настраиваемый RallyPoint
             agent.destination = target.position;
             _unitEnvironment = GetComponent<UnitEnvironment>();
         }
@@ -25,21 +25,18 @@ namespace Ziggurat
             if (agent.velocity.magnitude > 1)
             {
                 _unitEnvironment.Moving(agent.speed);
-                Debug.Log("Moving");
+                //Debug.Log("Moving");
             }
             else
             {
                 _unitEnvironment.Moving(0f);
+                _unitEnvironment.StartAnimation("Die");
             }
-           /* if (agent.speed > 2f)
-            {
-                _unitEnvironment.Moving(agent.speed);
-            }
-            else
-            {
-                _unitEnvironment.StartAnimation("Idle");
-            }*/
+        }
 
+        private Transform FindNearestTarget()//todo вынести в другой класс
+        {
+            return null;
         }
     }
 }
