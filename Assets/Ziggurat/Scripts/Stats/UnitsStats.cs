@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ziggurat
@@ -49,6 +50,7 @@ namespace Ziggurat
             result._missChance= _missChance;
             result._critChance= _critChance;
             result._fastOrStrongAttackChance = _fastOrStrongAttackChance;
+
             return result;
         }
     }

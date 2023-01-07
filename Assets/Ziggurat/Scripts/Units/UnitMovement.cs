@@ -7,6 +7,9 @@ namespace Ziggurat
         // Положение точки назначения
         public Transform target;
 
+        [SerializeField]
+        private float _sightDistance = 5;
+
         private UnitEnvironment _unitEnvironment;
 
         // Получение компонента агента
@@ -30,8 +33,13 @@ namespace Ziggurat
             else
             {
                 _unitEnvironment.Moving(0f);
-                _unitEnvironment.StartAnimation("Die");
+                //_unitEnvironment.StartAnimation("Die");
             }
+        }
+
+        private bool CheckDistance(Vector3 target)//
+        {
+            return (this.transform.position + target).magnitude < _sightDistance;
         }
 
         private Transform FindNearestTarget()//todo вынести в другой класс

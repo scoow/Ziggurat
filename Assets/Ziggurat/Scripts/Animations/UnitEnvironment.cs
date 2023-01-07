@@ -45,7 +45,8 @@ namespace Ziggurat
 		private void AnimationEventEnd_UnityEditor(string result)
 		{
 			//В конце анимации смерти особый аргумент и своя логика обработки
-			if (result == "die") Destroy(gameObject);
+			if (result == "die") Destroy(gameObject);//todo disable 
+
 			OnEndAnimation.Invoke(null, null);
 		}
 	}
