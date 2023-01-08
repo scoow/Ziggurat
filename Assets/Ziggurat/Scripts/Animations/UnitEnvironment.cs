@@ -48,7 +48,7 @@ namespace Ziggurat
 			if (result == "die")
 				gameObject.SetActive(false);
 
-			OnEndAnimation.Invoke(null, null);
+			//OnEndAnimation.Invoke(null, null);
 		}
 	}
 }

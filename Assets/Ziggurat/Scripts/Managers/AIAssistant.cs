@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,9 +22,8 @@ namespace Ziggurat
 
         public List<Unit> GetAllUnits()
         {
-            CreateListOfActiveUnitsInPool();
+            CreateListOfActiveUnitsInPool();//событие при создании юнита в пуле или при смерти
             return _activeUnits;
         }
-
     }
 }

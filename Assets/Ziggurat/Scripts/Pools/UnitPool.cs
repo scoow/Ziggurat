@@ -22,7 +22,7 @@ namespace Ziggurat
 
         public List<Unit> GetActiveUnits()
         {
-            return _elements.Where(x => x.enabled == true).ToList();
+            return _elements.Where(x => x.isActiveAndEnabled).ToList();
         }
     }
 }

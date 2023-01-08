@@ -7,9 +7,11 @@ namespace Ziggurat
 {
     public class Unit : MonoBehaviour
     {
-        public UnitType _unitType;//
+        //todo добавить автомат
+
+        public UnitType _unitType;//тип юнита
         private UnitsStats _stats;
-        Transform _target;
+        private Transform _target;
 
         private UnitMovement _unitMovement;
 
@@ -33,6 +35,10 @@ namespace Ziggurat
             _unitMovement = GetComponent<UnitMovement>();
             _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
             _timer = _seekTimeout;
+
+           
+            _target = FindObjectOfType<UnitsContainer>().transform;//
+            _unitMovement.SetTarget(_target);
         }
         private void Update()
         {
@@ -40,18 +46,28 @@ namespace Ziggurat
             if (_timer <= 0)
             {
                 _timer = _seekTimeout;
-                _target = FindNearestTarget();
-                _unitMovement.SetTarget(_target);
+                _target = TryFindNearestTarget(out bool isSuccess);
+                if (isSuccess)
+                {
+                    _unitMovement.SetTarget(_target);
+                }
+
+
                 Debug.Log(this + "нашел врага" + _target);
+
+                if (/*IsEnemy(_target)*/(Distance(_target)>1) && TargetInAttackRange(_target))
+                {
+                    _unitMovement.StartAnim("Fast");//todo enum состояний
+                }
             }
         }
 
-        private bool IsTargetInSight(Transform target)//
+        private bool TargetInSight(Transform target)//
         {
             return Distance(target.transform) < _sightDistance;
         }
 
-        private bool IsTargetInAttackRange(Transform target)
+        private bool TargetInAttackRange(Transform target)
         {
             return Distance(target.transform) < _attackRange;
         }
@@ -61,9 +77,15 @@ namespace Ziggurat
             return Vector3.Distance(transform.position, target.position);
         }
 
-        public Transform FindNearestTarget()
+        public Transform TryFindNearestTarget(out bool isSuccess)
         {
-            return GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x)).transform;
+            var result = GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x) && TargetInSight(x.transform));
+            isSuccess = result != null;
+
+            if (!isSuccess)
+                return this.transform;
+
+            return result.transform;
         }
 
         private bool IsEnemy(Unit target)
@@ -71,12 +93,9 @@ namespace Ziggurat
             return target._unitType != this._unitType;
         }
 
-        private IEnumerator WaitAndSeek(float delay)
+        private void Death()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(delay);
-            }
+
         }
     }
 }

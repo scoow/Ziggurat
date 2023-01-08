@@ -35,6 +35,11 @@ namespace Ziggurat
             agent.destination = target.position;
         }
 
+        public void StartAnim(string animation)//исправить
+        {
+            _unitEnvironment.StartAnimation(animation);
+        }
+
         private void Update() //todo анимация при ходьбе
         {
             if (agent.velocity.magnitude > 1)
