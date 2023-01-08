@@ -8,7 +8,11 @@ namespace Ziggurat
         private Controls _controls;
 
         [SerializeField]
-        private float _speed = 10;
+        private float _cameraMoveSpeed = 20;
+        [SerializeField]
+        private float _scaleSensitivity = 2;
+        [SerializeField]
+        private float _rotateSensitivity = 30;
 
         private void OnEnable()
         {
@@ -27,20 +31,19 @@ namespace Ziggurat
         }
         private void SetMovement(Vector2 movement)
         {
-            _movementVector = new Vector3(movement.x, 0f, movement.y);
+            _movementVector = new Vector3(movement.x, 0f, movement.y) * _cameraMoveSpeed;
         }
         private void SetScale(float scale)
         {
-            _movementVector = new Vector3(0f, scale, 0f);
+            _movementVector = new Vector3(0f, scale * _scaleSensitivity, 0f);
         }
         private void Rotate(float angle)
         {
-            transform.Rotate(Time.deltaTime * _speed * new Vector3(0f, angle, 0f));
+            transform.Rotate(Time.deltaTime * _rotateSensitivity * new Vector3(0f, angle, 0f));
         }
-
         private void Move()
         {
-            transform.Translate(Time.deltaTime * _speed * _movementVector);
+            transform.Translate(Time.deltaTime * _movementVector);
         }
         private void Update()
         {

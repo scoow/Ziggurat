@@ -12,7 +12,9 @@ namespace Ziggurat
             _activeUnits = new List<Unit>();
             CreateListOfActiveUnitsInPool();
         }
-
+        /// <summary>
+        /// Добавление живых активных юнитов в список
+        /// </summary>
         private void CreateListOfActiveUnitsInPool()
         {
             _activeUnits = GameManager.instance._spawnAssistant._unitPool[UnitType.Blue].GetActiveUnits();
@@ -22,7 +24,7 @@ namespace Ziggurat
 
         public List<Unit> GetAllUnits()
         {
-            CreateListOfActiveUnitsInPool();//событие при создании юнита в пуле или при смерти
+            CreateListOfActiveUnitsInPool();//todo событие при создании юнита в пуле или при смерти
             return _activeUnits;
         }
     }

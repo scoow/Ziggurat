@@ -15,6 +15,9 @@ namespace Ziggurat
         /// </summary>
         public Transform _unitsContainer;
 
+        /// <summary>
+        /// Список зиккуратов
+        /// </summary>
         private List<UnitSpawner> _unitSpawners = new();
         private Transform _blueUnitSpawner;
         private Transform _greenUnitSpawner;
@@ -40,6 +43,9 @@ namespace Ziggurat
             _unitPool.Add(UnitType.Green, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_green"), UnitType.Green, _unitsContainer));
             _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_red"), UnitType.Red, _unitsContainer));
         }
+        /// <summary>
+        /// Для теста - спавн на клавиши 1, 2, 3
+        /// </summary>
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))

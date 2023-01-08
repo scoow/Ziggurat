@@ -15,7 +15,6 @@ namespace Ziggurat
             _parent = parent;
             _elements = new List<T>();
         }
-
         public virtual void Init(int count)
         {
             for (int i = 0; i < count; i++)
@@ -23,7 +22,6 @@ namespace Ziggurat
                 PoolUp(false);
             }
         }
-
         public T GetAviableOrCreateNew(Transform spawnPoint)
         {
             T result = _elements.Find(element => element.gameObject.activeSelf == false);

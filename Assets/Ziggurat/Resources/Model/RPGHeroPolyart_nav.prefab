@@ -712,8 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  _sightDistance: 5
-  _attackDistance: 2
+  _unitEnvironment: {fileID: 0}
 --- !u!114 &-3585841728172522143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,6 +725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b01ddfe8155404aaac665fdeda6c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitType: 0
+  _sightDistance: 5
+  _attackRange: 2
+  _seekTimeout: 4
 --- !u!1 &4651553551747386351
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +887,7 @@ GameObject:
   - component: {fileID: 4682998623331527107}
   - component: {fileID: 4674376412111833953}
   - component: {fileID: 4651086949887925773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PolyartSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}

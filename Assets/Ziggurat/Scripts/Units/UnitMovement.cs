@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
+//todo сделать класс для управления движением
 namespace Ziggurat
 {
     public class UnitMovement : MonoBehaviour

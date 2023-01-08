@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
+//todo упростить, разделить логику
 namespace Ziggurat
 {
     public class Unit : MonoBehaviour
@@ -114,4 +113,9 @@ namespace Ziggurat
             _unitMovement.StartAnim("Die");
         }
     }
+
+    /*_nearestEnemy.GetComponent<EnemyController>().OnWinerMessage += AtackNearestEnemy;
+        transform.LookAt(_nearestEnemy.transform);       
+
+        return _nearestEnemy;*/
 }

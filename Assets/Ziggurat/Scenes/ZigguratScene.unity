@@ -2923,6 +2923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
+  _scaleSensitivity: 2
+  _rotateSensitivity: 30
 --- !u!4 &973550389
 Transform:
   m_ObjectHideFlags: 0

@@ -19,10 +19,13 @@ namespace Ziggurat
             result._unitType = _unitType;
             return result;
         }
-
+        /// <summary>
+        /// Конвертация словаря в список активных юнитов
+        /// </summary>
+        /// <returns>список активных юнитов</returns>
         public List<Unit> GetActiveUnits()
         {
-            return _elements.Where(x => x.isActiveAndEnabled).ToList();
+            return _elements.Where(x => x.isActiveAndEnabled).ToList();//todo решить, какой из способов хранения списка юнитов использовать
         }
     }
 }
