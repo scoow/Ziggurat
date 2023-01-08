@@ -36,9 +36,11 @@ namespace Ziggurat
             _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
             _timer = _seekTimeout;
 
-           
-            _target = FindObjectOfType<UnitsContainer>().transform;//
+
+            _target = FindObjectOfType<UnitsContainer>().transform;//temp
             _unitMovement.SetTarget(_target);
+
+            //Debug.Log(_stats.Health);
         }
         private void Update()
         {
@@ -53,12 +55,26 @@ namespace Ziggurat
                 }
 
 
-                Debug.Log(this + "нашел врага" + _target);
+                //Debug.Log(this + "нашел врага" + _target);
 
-                if (/*IsEnemy(_target)*/(Distance(_target)>1) && TargetInAttackRange(_target))
+                if (/*IsEnemy(_target)*/(Distance(_target) > 1) && TargetInAttackRange(_target))
                 {
-                    _unitMovement.StartAnim("Fast");//todo enum состояний
+                    Attack();
                 }
+            }
+        }
+
+        private void Attack()
+        {
+            transform.LookAt(_target);
+            float randomChance = Random.value;
+            if ((randomChance * 100) > _stats.FastOrStrongAttackChance)
+            {
+                _unitMovement.StartAnim("Fast");
+            }
+            else
+            {
+                _unitMovement.StartAnim("Strong");//todo enum состояний
             }
         }
 
@@ -95,7 +111,7 @@ namespace Ziggurat
 
         private void Death()
         {
-
+            _unitMovement.StartAnim("Die");
         }
     }
 }
