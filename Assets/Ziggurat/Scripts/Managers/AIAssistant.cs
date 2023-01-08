@@ -21,7 +21,11 @@ namespace Ziggurat
             _activeUnits.AddRange(GameManager.instance._spawnAssistant._unitPool[UnitType.Red].GetActiveUnits());
         }
 
-        public List<Unit> GetAllUnits { get { return _activeUnits; } }
+        public List<Unit> GetAllUnits()
+        {
+            CreateListOfActiveUnitsInPool();
+            return _activeUnits;
+        }
 
     }
 }

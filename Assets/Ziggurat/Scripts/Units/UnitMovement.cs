@@ -8,9 +8,7 @@ namespace Ziggurat
     {
         // Положение точки назначения
         public Transform target;
-        /// <summary>
-        /// Дальность взгляда (обнаружения)
-        /// </summary>
+
 
 
         [SerializeField]
@@ -26,14 +24,10 @@ namespace Ziggurat
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             // Указаие точки назначения
 /*            target = FindObjectOfType<UnitsContainer>().transform;//todo сделать настраиваемый RallyPoint
-                                                                  //target = FindNearestTarget();
 
             SetTarget(target);*/
 
-
-            //agent.destination = target.position;
             _unitEnvironment = GetComponent<UnitEnvironment>();
-            // StartCoroutine(WaitAndSeek(5));
         }
 
         public void SetTarget(Transform target)
@@ -53,7 +47,5 @@ namespace Ziggurat
                 //_unitEnvironment.StartAnimation("Die");
             }
         }
-
-/*        */
     }
 }
