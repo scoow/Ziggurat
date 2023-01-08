@@ -16,7 +16,7 @@ namespace Ziggurat
         {
             instance = this;
         }
-        private void Start()
+        private void OnEnable()
         {
             _spawnAssistant = GetComponent<SpawnAssistant>();
             _configurationAssistant = GetComponent<ConfigurationAssistant>();

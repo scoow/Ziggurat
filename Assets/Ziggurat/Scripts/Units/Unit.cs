@@ -18,29 +18,42 @@ namespace Ziggurat
         /// </summary>
         [SerializeField]
         private float _sightDistance = 5;
-        private void OnEnable()
-        {
+        /// <summary>
+        /// Дальность атаки
+        /// </summary>
+        [SerializeField]
+        private float _attackRange = 2;
+        [SerializeField]
+        private float _seekTimeout = 4;//кд до поиска противника
 
-            //todo исправить _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
-            //StartCoroutine(WaitAndSeek(3f));
+        private float _timer;//время до поиска противника
 
-        }
         private void Start()
         {
             _unitMovement = GetComponent<UnitMovement>();
-            //_stats = GetComponent<UnitsStats>();
-
+            _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
+            _timer = _seekTimeout;
         }
         private void Update()
         {
-            _target = FindNearestTarget();
-            _unitMovement.SetTarget(_target);
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                _timer = _seekTimeout;
+                _target = FindNearestTarget();
+                _unitMovement.SetTarget(_target);
+                Debug.Log(this + "нашел врага" + _target);
+            }
         }
 
         private bool IsTargetInSight(Transform target)//
         {
-            //return (this.transform.position + target).magnitude < _sightDistance;
             return Distance(target.transform) < _sightDistance;
+        }
+
+        private bool IsTargetInAttackRange(Transform target)
+        {
+            return Distance(target.transform) < _attackRange;
         }
 
         private float Distance(Transform target)
@@ -48,14 +61,9 @@ namespace Ziggurat
             return Vector3.Distance(transform.position, target.position);
         }
 
-        public Transform FindNearestTarget()//todo вынести в другой класс
+        public Transform FindNearestTarget()
         {
-            /*var minDistance = GameManager.instance._aiAssistant.GetAllUnits.Except(new List<Unit>() { this }).Min(x => Distance(x.transform)); //todo проверка на дружественность
-            return GameManager.instance._aiAssistant.GetAllUnits.Except(new List<Unit>() { this }).FirstOrDefault(x => Distance(x.transform) <= minDistance).transform ?? transform;*/
-            //var minDistance = GameManager.instance._aiAssistant.GetAllUnits.Except(new List<Unit>().Where(x => x._unitType == this._unitType)).Min(x => Distance(x.transform)); //todo проверка на дружественность
-            // return GameManager.instance._aiAssistant.GetAllUnits.Except(new List<Unit>().Where(x => x._unitType == this._unitType)).Min(x => Distance(x.transform));// ?? transform;
             return GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x)).transform;
-            
         }
 
         private bool IsEnemy(Unit target)

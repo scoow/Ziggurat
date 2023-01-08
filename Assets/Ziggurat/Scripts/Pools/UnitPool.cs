@@ -6,7 +6,7 @@ namespace Ziggurat
 {
     public class UnitPool : BasePool<Unit>
     {
-        private UnitType _unitType;
+        protected UnitType _unitType;
         public UnitPool(Unit prefab, UnitType unitType, Transform parent, int count = 1) : base(prefab, parent)
         {
             _unitType = unitType;
