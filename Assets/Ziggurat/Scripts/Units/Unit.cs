@@ -6,11 +6,17 @@ namespace Ziggurat
 {
     public class Unit : MonoBehaviour
     {
-        //todo добавить автомат
+        //todo добавить автомат состояний
 
         public UnitType _unitType;//тип юнита
+
         private UnitsStats _stats;
+
+        private float _hp;
+
         private Transform _target;
+        private Collider _unitCollider;
+        private Collider _swordCollider;
 
         private UnitMovement _unitMovement;
 
@@ -24,6 +30,7 @@ namespace Ziggurat
         /// </summary>
         [SerializeField]
         private float _attackRange = 2;
+
         [SerializeField]
         private float _seekTimeout = 4;//кд до поиска противника
 
@@ -31,11 +38,18 @@ namespace Ziggurat
 
         private void Start()
         {
+            _unitCollider = GetComponent<CapsuleCollider>();//Capsule
+            _swordCollider = GetComponentInChildren<BoxCollider>();
+
+            
+
             _unitMovement = GetComponent<UnitMovement>();
             _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
             _timer = _seekTimeout;
 
+            _hp = _stats.Health;//hp
 
+            _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
             _target = FindObjectOfType<UnitsContainer>().transform;//temp
             _unitMovement.SetTarget(_target);
 
@@ -56,7 +70,7 @@ namespace Ziggurat
 
                 //Debug.Log(this + "нашел врага" + _target);
 
-                if (/*IsEnemy(_target)*/(Distance(_target) > 1) && TargetInAttackRange(_target))
+                if (/*IsEnemy(_target)*/(Distance(_target) > 0.1) && TargetInAttackRange(_target))
                 {
                     Attack();
                 }
@@ -69,13 +83,27 @@ namespace Ziggurat
             float randomChance = Random.value;
             if ((randomChance * 100) > _stats.FastOrStrongAttackChance)
             {
-                _unitMovement.StartAnim("Fast");
+                _unitMovement.StartAnimation("Fast");
             }
             else
             {
-                _unitMovement.StartAnim("Strong");//todo enum состояний
+                _unitMovement.StartAnimation("Strong");//todo enum состояний
             }
         }
+
+        public void WeaponTriggerDetected(Weapon weapon)
+        {
+            Debug.Log("child collided");
+        }
+
+/*        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("Collision detected!" + collision);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("Trigger detected!");
+        }*/
 
         private bool TargetInSight(Transform target)//
         {
@@ -110,7 +138,7 @@ namespace Ziggurat
 
         private void Death()
         {
-            _unitMovement.StartAnim("Die");
+            _unitMovement.StartAnimation("Die");
         }
     }
 

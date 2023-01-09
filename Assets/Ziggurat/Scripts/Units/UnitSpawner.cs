@@ -19,7 +19,7 @@ namespace Ziggurat
 
         private void SpawnUnit()
         {
-            //todo
+            //todo вызывать спавн через менеджер по таймеру
         }
     }
 

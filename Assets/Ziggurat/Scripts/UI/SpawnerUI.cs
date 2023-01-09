@@ -12,7 +12,7 @@ namespace Ziggurat
         }
         public void GetStats()
         {
-            //todo
+            //todo реализация?
         }
         private void Start()
         {
