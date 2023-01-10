@@ -14,11 +14,9 @@ namespace Ziggurat
 
         private float _hp;
 
+        private Transform _defaultTarget;
         private Transform _targetTransform;
         private Unit _targetUnit;
-
-        private Collider _unitCollider;
-        private Collider _swordCollider;
 
         private UnitMovement _unitMovement;
 
@@ -39,12 +37,14 @@ namespace Ziggurat
         private float _timer;//время до поиска противника
         private bool _fastAttack;
 
+        private void OnEnable()
+        {
+            _targetTransform = _defaultTarget;
+        }
+
+
         private void Start()
         {
-            _unitCollider = GetComponent<CapsuleCollider>();//Capsule
-            _swordCollider = GetComponentInChildren<BoxCollider>();
-
-            
 
             _unitMovement = GetComponent<UnitMovement>();
             _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
@@ -53,10 +53,11 @@ namespace Ziggurat
             _hp = _stats.Health;//hp
 
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
-            _targetTransform = FindObjectOfType<UnitsContainer>().transform;//temp
-            _unitMovement.SetTarget(_targetTransform);
 
-            //Debug.Log(_stats.Health);
+            _defaultTarget = FindObjectOfType<UnitsContainer>().transform;//temp
+            _targetTransform = _defaultTarget;
+
+            _unitMovement.SetTarget(_targetTransform);
         }
         private void Update()
         {
@@ -88,6 +89,8 @@ namespace Ziggurat
 
             _fastAttack = (randomChance * 100) > _stats.FastOrStrongAttackChance;
 
+            
+
             if (_fastAttack)
             {
                 _unitMovement.StartAnimation("Fast");
@@ -101,17 +104,38 @@ namespace Ziggurat
         public void WeaponTriggerDetected(Weapon weapon)
         {
             //Debug.Log("child collided");
+            float damage;
+
             if (_fastAttack)
             {
-                _targetUnit.TakeDamage(_stats.FastAttackDamage);
+                damage = _stats.FastAttackDamage;
+               
 
             }
-                
+
             else
             {
-                _targetUnit.TakeDamage(_stats.StrongAttackDamage);
+                damage = _stats.StrongAttackDamage;
+
+
             }
-                
+            
+
+            float randomChance = Random.value;
+
+            if (_stats.CritChance > randomChance * 100)
+            {
+                damage *= 2;
+            }
+
+
+            randomChance = Random.value;
+            if (_stats.MissChance > randomChance * 100)
+            {
+                damage *= 0;
+            }
+
+            _targetUnit.TakeDamage(damage);
         }
 
         public void TakeDamage(float damage)
