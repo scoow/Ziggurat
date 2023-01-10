@@ -14,7 +14,9 @@ namespace Ziggurat
 
         private float _hp;
 
-        private Transform _target;
+        private Transform _targetTransform;
+        private Unit _targetUnit;
+
         private Collider _unitCollider;
         private Collider _swordCollider;
 
@@ -35,6 +37,7 @@ namespace Ziggurat
         private float _seekTimeout = 4;//кд до поиска противника
 
         private float _timer;//время до поиска противника
+        private bool _fastAttack;
 
         private void Start()
         {
@@ -50,8 +53,8 @@ namespace Ziggurat
             _hp = _stats.Health;//hp
 
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
-            _target = FindObjectOfType<UnitsContainer>().transform;//temp
-            _unitMovement.SetTarget(_target);
+            _targetTransform = FindObjectOfType<UnitsContainer>().transform;//temp
+            _unitMovement.SetTarget(_targetTransform);
 
             //Debug.Log(_stats.Health);
         }
@@ -61,16 +64,17 @@ namespace Ziggurat
             if (_timer <= 0)
             {
                 _timer = _seekTimeout;
-                _target = TryFindNearestTarget(out bool isSuccess);
+                _targetUnit = TryFindNearestTarget(out bool isSuccess);
+                _targetTransform = _targetUnit.transform;
                 if (isSuccess)
                 {
-                    _unitMovement.SetTarget(_target);
+                    _unitMovement.SetTarget(_targetTransform);
                 }
 
 
-                //Debug.Log(this + "нашел врага" + _target);
+                //Debug.Log(this + "нашел врага" + _targetTransform);
 
-                if (/*IsEnemy(_target)*/(Distance(_target) > 0.1) && TargetInAttackRange(_target))
+                if (/*IsEnemy(_targetTransform)*/(Distance(_targetTransform) > 0.1) && TargetInAttackRange(_targetTransform))
                 {
                     Attack();
                 }
@@ -79,9 +83,12 @@ namespace Ziggurat
 
         private void Attack()
         {
-            transform.LookAt(_target);
+            transform.LookAt(_targetTransform);
             float randomChance = Random.value;
-            if ((randomChance * 100) > _stats.FastOrStrongAttackChance)
+
+            _fastAttack = (randomChance * 100) > _stats.FastOrStrongAttackChance;
+
+            if (_fastAttack)
             {
                 _unitMovement.StartAnimation("Fast");
             }
@@ -93,17 +100,31 @@ namespace Ziggurat
 
         public void WeaponTriggerDetected(Weapon weapon)
         {
-            Debug.Log("child collided");
+            //Debug.Log("child collided");
+            if (_fastAttack)
+            {
+                _targetUnit.TakeDamage(_stats.FastAttackDamage);
+
+            }
+                
+            else
+            {
+                _targetUnit.TakeDamage(_stats.StrongAttackDamage);
+            }
+                
         }
 
-/*        private void OnCollisionEnter(Collision collision)
+        public void TakeDamage(float damage)
         {
-            Debug.Log("Collision detected!" + collision);
+            _hp -= damage;
+            Debug.Log(this.ToString() + _hp);
+
+            if (_hp <= 0)
+            {
+                Death();
+            }
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Trigger detected!");
-        }*/
+
 
         private bool TargetInSight(Transform target)//
         {
@@ -120,15 +141,15 @@ namespace Ziggurat
             return Vector3.Distance(transform.position, target.position);
         }
 
-        public Transform TryFindNearestTarget(out bool isSuccess)
+        public Unit TryFindNearestTarget(out bool isSuccess)
         {
             var result = GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x) && TargetInSight(x.transform));
             isSuccess = result != null;
 
-            if (!isSuccess)
-                return this.transform;
+            if (!isSuccess)//todo убрать заглушку
+                return this;
 
-            return result.transform;
+            return result;
         }
 
         private bool IsEnemy(Unit target)
