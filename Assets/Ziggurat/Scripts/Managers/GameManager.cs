@@ -35,7 +35,7 @@ namespace Ziggurat
         public SpawnAssistant _spawnAssistant;
         public ConfigurationAssistant _configurationAssistant;
         public AIAssistant _aiAssistant;//
-
+        public UIAssistant _uiAssistant;
 
         private void Awake()
         {
@@ -46,6 +46,7 @@ namespace Ziggurat
             _spawnAssistant = GetComponent<SpawnAssistant>();
             _configurationAssistant = GetComponent<ConfigurationAssistant>();
             _aiAssistant = GetComponent<AIAssistant>();
+            _uiAssistant = GetComponent<UIAssistant>();
         }
     }
 }

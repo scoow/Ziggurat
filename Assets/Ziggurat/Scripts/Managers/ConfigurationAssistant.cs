@@ -1,5 +1,6 @@
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Ziggurat
@@ -16,13 +17,17 @@ namespace Ziggurat
         /// <summary>
         /// Словарь с действующими настройками статов для юнитов
         /// </summary>
-        private Dictionary<UnitType, UnitsStats> _currentUnitsStats = new();
+        private Dictionary<UnitType, UnitsStats> _currentUnitsStats;
         /// <summary>
         /// Настройки по-умолчанию остаются неизменными, создаётся их копия
         /// </summary>
+        private void Awake()
+        {
+            _currentUnitsStats = new(_defaultUnitsStats);
+        }
         private void Start()
         {
-            _currentUnitsStats = _defaultUnitsStats.Clone();
+            
         }
         /// <summary>
         /// Чтение статов юнита из хранилища

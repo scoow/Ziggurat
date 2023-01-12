@@ -9,6 +9,7 @@ namespace Ziggurat
         public void OnPointerDown(PointerEventData eventData)
         {
             Debug.Log("SpawnerUI");
+            GameManager.instance._uiAssistant.OpenMenu();
         }
         public void GetStats()
         {

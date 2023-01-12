@@ -183,6 +183,8 @@ namespace Ziggurat
 
         private void Death()
         {
+            _targetUnit= null;
+            _targetTransform = _defaultTarget;
             _unitMovement.StartAnimation("Die");
         }
     }
