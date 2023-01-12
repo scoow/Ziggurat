@@ -8,14 +8,14 @@ namespace Ziggurat
         private UnitSpawner _unitSpawner;
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("SpawnerUI");
-            GameManager.instance._uiAssistant.OpenMenu();
+            //Debug.Log("SpawnerUI");
+            GameManager.instance._uiAssistant.OpenMenu(this._unitSpawner.SpawnerType);
         }
         public void GetStats()
         {
             //todo реализация?
         }
-        private void Start()
+        private void OnEnable()
         {
             _unitSpawner = GetComponent<UnitSpawner>();
         }

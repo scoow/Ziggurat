@@ -7,8 +7,7 @@ namespace Ziggurat
     public class StatsMenu : MonoBehaviour
     {
         private UnitsStats _unitsStats;
-        private UnitType _currentUnitType;
-        private CanvasRenderer _canvasRenderer;
+        private Canvas _canvas;
 
         [SerializeField]
         private TextMeshProUGUI _UnitTypeText;
@@ -30,23 +29,34 @@ namespace Ziggurat
 
         private void Start()
         {
-            _canvasRenderer = GetComponent<CanvasRenderer>();
+            _canvas = GetComponent<Canvas>();
             //_canvasRenderer.SetMesh.
-            _currentUnitType = UnitType.Blue;//todo
-            _unitsStats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_currentUnitType);
+            //ReadStats();
 
+            
+        }
+
+        public void ReadStats(UnitType unitType)
+        {
+            _unitsStats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(unitType);
+        }
+
+        public void HideOrShow()
+        {
+            _canvas.gameObject.SetActive(!gameObject.activeSelf);
             UpdateStatsMenu();
         }
+
         public void UpdateStatsMenu()
         {
-            _UnitTypeText.text += " " + _unitsStats.UnitType;
-            _hpText.text += " " + _unitsStats.Health;
-            _MovementSpeedText.text += " " + _unitsStats.MovementSpeed;
-            _FastAttackDamageText.text += " " + _unitsStats.FastAttackDamage;
-            _StrongAttackDamageText.text += " " + _unitsStats.StrongAttackDamage;
-            _MissChanceText.text += " " + _unitsStats.MissChance;
-            _CritChanceText.text += " " + _unitsStats.CritChance;
-            _FastOrStrongAttackChanceText.text += " " + _unitsStats.FastOrStrongAttackChance;
+            _UnitTypeText.text = "UnitType " + _unitsStats.UnitType;
+            _hpText.text = "Health " + _unitsStats.Health;
+            _MovementSpeedText.text = "MovementSpeed " + _unitsStats.MovementSpeed;
+            _FastAttackDamageText.text = "FastAttackDamage " + _unitsStats.FastAttackDamage;
+            _StrongAttackDamageText.text = "StrongAttackDamage " + _unitsStats.StrongAttackDamage;
+            _MissChanceText.text = "MissChance " + _unitsStats.MissChance;
+            _CritChanceText.text = "CritChance " + _unitsStats.CritChance;
+            _FastOrStrongAttackChanceText.text = "FastOrStrongAttackChance " + _unitsStats.FastOrStrongAttackChance;
         }
     }
 }

@@ -13,23 +13,46 @@ namespace Ziggurat
         private void Start()
         {
             _statsMenu= FindObjectOfType<StatsMenu>();
-            _startPosition = _statsMenu.GetComponent<RectTransform>();
-            _endPosition = _startPosition;
 
-            
-            
+            _currentPosition = _statsMenu.GetComponent<RectTransform>();
+
+            _startPosition = _currentPosition;
+            _endPosition = _startPosition;
             _endPosition.position += new Vector3(0f, 100f, 0f);
         }
-        public void OpenMenu()
+        public void OpenMenu(UnitType unitType)
         {
-            StartCoroutine(SmoothMenuOpen());
+            _statsMenu.ReadStats(unitType);
+            _statsMenu.HideOrShow();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                _statsMenu.HideOrShow();
+                //OpenMenu();
+                //_currentPosition.transform.Translate(Vector3.up);
+            }
+        }
 
         public IEnumerator SmoothMenuOpen()
         {
-            transform.position = Vector3.Lerp(_startPosition.position, _endPosition.position, 1);
-            yield return null;
+           /* transform.position = Vector3.Lerp(_startPosition.position, _endPosition.position, 1);
+            yield return null;*/
+
+            float currentTime = 0f;
+
+            while (currentTime < 2)
+            {
+                _currentPosition.transform.position = Vector3.Lerp(_startPosition.position, _endPosition.position, currentTime);
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+            _currentPosition.transform.position = _endPosition.position;
+
+
+
         }
     }
 }
