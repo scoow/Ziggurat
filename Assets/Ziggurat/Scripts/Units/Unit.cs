@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 //todo упростить, разделить логику
@@ -6,6 +7,7 @@ namespace Ziggurat
 {
     public class Unit : MonoBehaviour
     {
+        //public Event OnDeath;
         //todo добавить автомат состояний
 
         public UnitType _unitType;//тип юнита
@@ -39,9 +41,9 @@ namespace Ziggurat
 
         private void OnEnable()
         {
+            _defaultTarget = FindObjectOfType<UnitsContainer>().transform;//temp
             _targetTransform = _defaultTarget;
         }
-
 
         private void Start()
         {
@@ -54,7 +56,7 @@ namespace Ziggurat
 
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
 
-            _defaultTarget = FindObjectOfType<UnitsContainer>().transform;//temp
+            
             _targetTransform = _defaultTarget;
 
             _unitMovement.SetTarget(_targetTransform);
@@ -85,7 +87,7 @@ namespace Ziggurat
         private void Attack()
         {
             transform.LookAt(_targetTransform);
-            float randomChance = Random.value;
+            float randomChance = UnityEngine.Random.value;
 
             _fastAttack = (randomChance * 100) > _stats.FastOrStrongAttackChance;
 
@@ -107,33 +109,18 @@ namespace Ziggurat
             float damage;
 
             if (_fastAttack)
-            {
                 damage = _stats.FastAttackDamage;
-               
-
-            }
-
             else
-            {
                 damage = _stats.StrongAttackDamage;
 
-
-            }
-            
-
-            float randomChance = Random.value;
+            float randomChance = UnityEngine.Random.value;
 
             if (_stats.CritChance > randomChance * 100)
-            {
                 damage *= 2;
-            }
 
-
-            randomChance = Random.value;
+            randomChance = UnityEngine.Random.value;
             if (_stats.MissChance > randomChance * 100)
-            {
                 damage *= 0;
-            }
 
             _targetUnit.TakeDamage(damage);
         }
@@ -148,8 +135,6 @@ namespace Ziggurat
                 Death();
             }
         }
-
-
         private bool TargetInSight(Transform target)//
         {
             return Distance(target.transform) < _sightDistance;
@@ -159,12 +144,10 @@ namespace Ziggurat
         {
             return Distance(target.transform) < _attackRange;
         }
-
         private float Distance(Transform target)
         {
             return Vector3.Distance(transform.position, target.position);
         }
-
         public Unit TryFindNearestTarget(out bool isSuccess)
         {
             var result = GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x) && TargetInSight(x.transform));
@@ -175,20 +158,19 @@ namespace Ziggurat
 
             return result;
         }
-
         private bool IsEnemy(Unit target)
         {
             return target._unitType != this._unitType;
         }
-
         private void Death()
         {
             _targetUnit= null;
             _targetTransform = _defaultTarget;
             _unitMovement.StartAnimation("Die");
+            //OnDeath();
         }
-    }
 
+    }
     /*_nearestEnemy.GetComponent<EnemyController>().OnWinerMessage += AtackNearestEnemy;
         transform.LookAt(_nearestEnemy.transform);       
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038db1c4618ce4d4fb1088c8fc925d56, type: 3}
   m_Name: RedUnitStats
   m_EditorClassIdentifier: 
-  _unitType: 0
+  _unitType: 2
   _health: 90
   _movementSpeed: 12
   _fastAttackDamage: 12

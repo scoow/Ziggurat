@@ -11,22 +11,16 @@ namespace Ziggurat
         }
         private void OnTriggerEnter(Collider other)
         {
-
             _owner.WeaponTriggerDetected(this);
-
+/*
             if (HitEnemyUnit(other))
-                Debug.Log("SWORD");
+                Debug.Log("SWORD");*/
         }
 
         private bool HitEnemyUnit(Collider unit)
         {
             Unit target = unit.GetComponentInParent<Unit>();
             bool targetIsEnemy = _owner._unitType != target._unitType;
-
-/*            if (targetIsEnemy)
-            {
-                target.TakeDamage(_owner.)
-            }*/
 
             return targetIsEnemy;
         }

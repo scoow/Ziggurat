@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Ziggurat
 {
@@ -30,10 +29,8 @@ namespace Ziggurat
         private void Start()
         {
             _canvas = GetComponent<Canvas>();
-            //_canvasRenderer.SetMesh.
-            //ReadStats();
-
-            
+            //убрать меню при старте игры
+           
         }
 
         public void ReadStats(UnitType unitType)
@@ -43,7 +40,7 @@ namespace Ziggurat
 
         public void HideOrShow()
         {
-            _canvas.gameObject.SetActive(!gameObject.activeSelf);
+            _canvas.enabled = !_canvas.enabled;
             UpdateStatsMenu();
         }
 

@@ -25,10 +25,6 @@ namespace Ziggurat
         {
             _currentUnitsStats = new(_defaultUnitsStats);
         }
-        private void Start()
-        {
-            
-        }
         /// <summary>
         /// Чтение статов юнита из хранилища
         /// </summary>

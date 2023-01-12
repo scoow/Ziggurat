@@ -22,25 +22,12 @@ namespace Ziggurat
         }
         public void OpenMenu(UnitType unitType)
         {
-            _statsMenu.ReadStats(unitType);
+            _statsMenu.ReadStats(unitType);//рптимизировать
             _statsMenu.HideOrShow();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                _statsMenu.HideOrShow();
-                //OpenMenu();
-                //_currentPosition.transform.Translate(Vector3.up);
-            }
         }
 
         public IEnumerator SmoothMenuOpen()
         {
-           /* transform.position = Vector3.Lerp(_startPosition.position, _endPosition.position, 1);
-            yield return null;*/
-
             float currentTime = 0f;
 
             while (currentTime < 2)
@@ -50,9 +37,6 @@ namespace Ziggurat
                 yield return null;
             }
             _currentPosition.transform.position = _endPosition.position;
-
-
-
         }
     }
 }
