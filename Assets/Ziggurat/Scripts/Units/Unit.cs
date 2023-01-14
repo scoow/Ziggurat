@@ -34,10 +34,13 @@ namespace Ziggurat
         private float _timer;//время до поиска противника
         private bool _fastAttack;
 
+        private HPBar _hpBar;
+
         private void Awake()
         {
             _unitMovement = GetComponent<UnitMovement>();
             _timer = _seekTimeout;
+            _hpBar = GetComponentInChildren<HPBar>();
         }
         private void OnEnable()
         {
@@ -50,6 +53,7 @@ namespace Ziggurat
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
             _currentTarget = GameManager.instance.AIAssistant.DefaultTarget;
             _unitMovement.SetTarget(_currentTarget);
+            _hpBar.SetMaxHP(_hp);
         }
         private void Update()
         {
@@ -105,6 +109,7 @@ namespace Ziggurat
         public void TakeDamage(float damage)
         {
             _hp -= damage;
+            _hpBar.SetHP(_hp);
             if (_hp <= 0)
                 Death();
         }

@@ -8,8 +8,8 @@ namespace Ziggurat
     {
         private List<Unit> _activeUnits;
         private Transform _defaultTarget;
-        private bool _hpBarEnabled = true;
         public Transform DefaultTarget => _defaultTarget;
+        private bool _hpBarEnabled = true;
 
         private void Awake()
         {
@@ -36,6 +36,9 @@ namespace Ziggurat
             CreateListOfActiveUnitsInPool();
             return _activeUnits;
         }
+        /// <summary>
+        /// Убить всех юнитов
+        /// </summary>
         public void KillAll_EDITOR()
         {
             CreateListOfActiveUnitsInPool();
@@ -45,6 +48,9 @@ namespace Ziggurat
             }
             _activeUnits.Clear();
         }
+        /// <summary>
+        /// Показать или скрыть полоску HP
+        /// </summary>
         public void ShowOrHideHPBar_EDITOR()
         {
             foreach (HPBar hPBar in FindObjectsOfType<HPBar>().ToList())

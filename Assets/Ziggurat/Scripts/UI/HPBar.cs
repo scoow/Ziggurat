@@ -1,20 +1,36 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ziggurat
 {
     public class HPBar : MonoBehaviour
     {
+        [SerializeField]
         private TextMeshProUGUI _hpText;//todo уменьшение полосы
-        private HPBarImage _hpBar;
+        //private HPBarImage _hpBar;
         private Canvas _canvas;
+        [SerializeField]
+        private Image _image;
 
-        private void Awake()
+        private float _maxHP;
+
+        private void OnEnable()
         {
             _canvas = GetComponent<Canvas>();
-            _hpBar = GetComponentInChildren<HPBarImage>();
-            _hpText = GetComponentInChildren<TextMeshProUGUI>();
+           // _hpText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        public void SetHP(float value)
+        {
+            _hpText.text = value.ToString();
+            _image.fillAmount= value/_maxHP;
+        }
+        public void SetMaxHP(float value)
+        {
+            _maxHP = value;
+            _image.fillAmount = 1;
+            _hpText.text = _maxHP.ToString();
         }
 
         public void Enable()

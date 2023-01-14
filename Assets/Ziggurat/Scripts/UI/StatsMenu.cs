@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -60,16 +61,24 @@ namespace Ziggurat
         }
         public void OnValueChanged_EDITOR()
         {
-            UnitsStats newStats = ScriptableObject.CreateInstance<UnitsStats>();
-            newStats.Init(_unitsStatsInMenu.UnitType,
-                                                 float.Parse(_hpText.text),
-                                                 float.Parse(_MovementSpeedText.text),
-                                                 float.Parse(_FastAttackDamageText.text),
-                                                 float.Parse(_StrongAttackDamageText.text),
-                                                 float.Parse(_MissChanceText.text),
-                                                 float.Parse(_CritChanceText.text),
-                                                 float.Parse(_FastOrStrongAttackChanceText.text));
-            GameManager.instance.ConfigurationAssistant.RewriteCurrentUnitStats(_unitsStatsInMenu.UnitType, newStats);
+            try
+            {
+                UnitsStats newStats = ScriptableObject.CreateInstance<UnitsStats>();
+                newStats.Init(_unitsStatsInMenu.UnitType,
+                                                     float.Parse(_hpText.text),
+                                                     float.Parse(_MovementSpeedText.text),
+                                                     float.Parse(_FastAttackDamageText.text),
+                                                     float.Parse(_StrongAttackDamageText.text),
+                                                     float.Parse(_MissChanceText.text),
+                                                     float.Parse(_CritChanceText.text),
+                                                     float.Parse(_FastOrStrongAttackChanceText.text));
+                GameManager.instance.ConfigurationAssistant.RewriteCurrentUnitStats(_unitsStatsInMenu.UnitType, newStats);
+            }
+            catch (FormatException)
+            {
+                Debug.LogError("Неправильные значения");
+            }
+            
         }
     }
 }
