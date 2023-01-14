@@ -38,6 +38,8 @@ namespace Ziggurat
         public AIAssistant _aiAssistant;
         public UIAssistant _uiAssistant;
 
+        public CameraController _cameraController;
+
         private void Awake()
         {
             instance = this;
@@ -51,6 +53,8 @@ namespace Ziggurat
             _aiAssistant = GetComponent<AIAssistant>();
 
             _uiAssistant = GetComponent<UIAssistant>();
+
+            _cameraController = FindObjectOfType<CameraController>();
         }
     }
 }

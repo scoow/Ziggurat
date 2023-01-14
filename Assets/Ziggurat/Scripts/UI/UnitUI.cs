@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UnitUI : MonoBehaviour
+namespace Ziggurat
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UnitUI : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private Unit _unit;
+        private void OnEnable()
+        {
+            _unit = GetComponent<Unit>();
+        }
+        public void OnPointerDown(PointerEventData _) => GameManager.instance._uiAssistant.OpenMenu(this._unit.UnitType);
     }
 }

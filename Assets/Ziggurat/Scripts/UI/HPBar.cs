@@ -24,9 +24,9 @@ namespace Ziggurat
         {
             this.enabled = false;
         }
-        public void LookAt(Transform target)
+        private void Update()
         {
-
+            transform.LookAt(GameManager.instance._cameraController.transform.position);
         }
     }
 }

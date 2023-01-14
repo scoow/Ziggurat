@@ -1,12 +1,11 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ziggurat
 {
     public class StatsMenu : MonoBehaviour
     {
-        private UnitsStats _unitsStats;
+        private UnitsStats _unitsStatsInMenu;
         private Canvas _canvas;
 
         [SerializeField]
@@ -30,36 +29,39 @@ namespace Ziggurat
         private void Start()
         {
             _canvas = GetComponent<Canvas>();
-            //убрать меню при старте игры
             _canvas.enabled= false;
         }
-
         public void ReadStats(UnitType unitType)
         {
-            _unitsStats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(unitType);
+            _unitsStatsInMenu = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(unitType);
         }
 
-        public void HideOrShow()
+        public void Hide()
         {
-            _canvas.enabled = !_canvas.enabled;
+            _canvas.enabled = false;
+        }
+        public void Show()
+        {
             UpdateStatsMenu();
+
+            _canvas.enabled = true;
         }
 
-        public void UpdateStatsMenu()
+        private void UpdateStatsMenu()
         {
-            _UnitTypeText.text = _unitsStats.UnitType.ToString();
-            _hpText.text =  _unitsStats.Health.ToString();
-            _MovementSpeedText.text =  _unitsStats.MovementSpeed.ToString();
-            _FastAttackDamageText.text = _unitsStats.FastAttackDamage.ToString();
-            _StrongAttackDamageText.text = _unitsStats.StrongAttackDamage.ToString();
-            _MissChanceText.text = _unitsStats.MissChance.ToString();
-            _CritChanceText.text = _unitsStats.CritChance.ToString();
-            _FastOrStrongAttackChanceText.text = _unitsStats.FastOrStrongAttackChance.ToString();
+            _UnitTypeText.text = _unitsStatsInMenu.UnitType.ToString();
+            _hpText.text =  _unitsStatsInMenu.Health.ToString();
+            _MovementSpeedText.text =  _unitsStatsInMenu.MovementSpeed.ToString();
+            _FastAttackDamageText.text = _unitsStatsInMenu.FastAttackDamage.ToString();
+            _StrongAttackDamageText.text = _unitsStatsInMenu.StrongAttackDamage.ToString();
+            _MissChanceText.text = _unitsStatsInMenu.MissChance.ToString();
+            _CritChanceText.text = _unitsStatsInMenu.CritChance.ToString();
+            _FastOrStrongAttackChanceText.text = _unitsStatsInMenu.FastOrStrongAttackChance.ToString();
         }
         public void OnValueChanged_EDITOR()
         {
             UnitsStats newStats = ScriptableObject.CreateInstance<UnitsStats>();
-            newStats.Init(_unitsStats.UnitType,
+            newStats.Init(_unitsStatsInMenu.UnitType,
                                                  float.Parse(_hpText.text),
                                                  float.Parse(_MovementSpeedText.text),
                                                  float.Parse(_FastAttackDamageText.text),
@@ -67,7 +69,7 @@ namespace Ziggurat
                                                  float.Parse(_MissChanceText.text),
                                                  float.Parse(_CritChanceText.text),
                                                  float.Parse(_FastOrStrongAttackChanceText.text));
-            GameManager.instance._configurationAssistant.RewriteCurrentUnitStats(_unitsStats.UnitType, newStats);
+            GameManager.instance._configurationAssistant.RewriteCurrentUnitStats(_unitsStatsInMenu.UnitType, newStats);
         }
     }
 }

@@ -8,8 +8,9 @@ namespace Ziggurat
     {
         //public Event OnDeath;
         //todo добавить автомат состояний
-
-        public UnitType _unitType;//тип юнита
+        [SerializeField]
+        private UnitType _unitType;//тип юнита
+        public UnitType UnitType { get; set; }
 
         private UnitsStats _stats;//базовые статы юнита
         private float _hp;//текущий показатель hp

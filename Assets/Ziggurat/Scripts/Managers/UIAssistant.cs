@@ -22,7 +22,8 @@ namespace Ziggurat
         public void OpenMenu(UnitType unitType)
         {
             _statsMenu.ReadStats(unitType);//оптимизировать
-            _statsMenu.HideOrShow();
+
+            _statsMenu.Show();
         }
 
         public IEnumerator SmoothMenuOpen()
