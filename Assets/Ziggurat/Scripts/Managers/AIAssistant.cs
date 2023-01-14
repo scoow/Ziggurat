@@ -26,9 +26,9 @@ namespace Ziggurat
         /// </summary>
         private void CreateListOfActiveUnitsInPool()
         {
-            _activeUnits = GameManager.instance.SpawnAssistant._unitPool[UnitType.Blue].GetActiveUnits();
-            _activeUnits.AddRange(GameManager.instance.SpawnAssistant._unitPool[UnitType.Green].GetActiveUnits());
-            _activeUnits.AddRange(GameManager.instance.SpawnAssistant._unitPool[UnitType.Red].GetActiveUnits());
+            _activeUnits = GameManager.instance.SpawnAssistant.UnitPool[UnitType.Blue].GetActiveUnits();
+            _activeUnits.AddRange(GameManager.instance.SpawnAssistant.UnitPool[UnitType.Green].GetActiveUnits());
+            _activeUnits.AddRange(GameManager.instance.SpawnAssistant.UnitPool[UnitType.Red].GetActiveUnits());
         }
         /// <summary>
         /// Получение списка активных юнитов

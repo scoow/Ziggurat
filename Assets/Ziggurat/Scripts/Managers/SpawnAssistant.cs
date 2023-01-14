@@ -10,6 +10,7 @@ namespace Ziggurat
         /// Пул юнитов, разделенных по типу
         /// </summary>
         private Dictionary<UnitType, UnitPool> _unitPool = new();
+        public Dictionary<UnitType, UnitPool> UnitPool => _unitPool;
         /// <summary>
         /// Родительский Transform для хранения юнитов
         /// </summary>
