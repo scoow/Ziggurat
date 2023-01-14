@@ -6,6 +6,13 @@ namespace Ziggurat
     public class AIAssistant : MonoBehaviour
     {
         private List<Unit> _activeUnits;
+        private Transform _defaultTarget;
+        public Transform DefaultTarget => _defaultTarget;
+
+        private void Awake()
+        {
+            _defaultTarget = FindObjectOfType<UnitsContainer>().transform;
+        }
 
         private void Start()
         {

@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 //todo сделать класс дл€ управлени€ движением
 namespace Ziggurat
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class UnitMovement : MonoBehaviour
     {
         // ѕоложение точки назначени€
@@ -16,14 +18,9 @@ namespace Ziggurat
         // ѕолучение компонента агента
         private UnityEngine.AI.NavMeshAgent _agent;
 
-        void Start()
+        private void Awake()
         {
             _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-            // ”казаие точки назначени€
-/*            target = FindObjectOfType<UnitsContainer>().transform;//todo сделать настраиваемый RallyPoint*/
-
-
-
             _unitEnvironment = GetComponent<UnitEnvironment>();
         }
 

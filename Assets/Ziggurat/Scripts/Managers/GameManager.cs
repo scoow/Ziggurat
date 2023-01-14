@@ -32,8 +32,9 @@ namespace Ziggurat
     {
         public static GameManager instance;
 
-        public SpawnAssistant _spawnAssistant;
         public ConfigurationAssistant _configurationAssistant;
+        public SpawnAssistant _spawnAssistant;
+        
         public AIAssistant _aiAssistant;//
         public UIAssistant _uiAssistant;
 
@@ -43,9 +44,12 @@ namespace Ziggurat
         }
         private void OnEnable()
         {
-            _spawnAssistant = GetComponent<SpawnAssistant>();
             _configurationAssistant = GetComponent<ConfigurationAssistant>();
+
+            _spawnAssistant = GetComponent<SpawnAssistant>();
+           
             _aiAssistant = GetComponent<AIAssistant>();
+
             _uiAssistant = GetComponent<UIAssistant>();
         }
     }

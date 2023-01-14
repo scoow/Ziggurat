@@ -11,7 +11,7 @@ namespace Ziggurat
         }
         private void OnTriggerEnter(Collider other)
         {
-            _owner.WeaponTriggerDetected(this);
+            _owner.WeaponTriggerDetected();
 /*
             if (HitEnemyUnit(other))
                 Debug.Log("SWORD");*/

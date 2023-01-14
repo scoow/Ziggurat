@@ -2345,8 +2345,8 @@ GameObject:
   m_Component:
   - component: {fileID: 600153040}
   - component: {fileID: 600153039}
-  - component: {fileID: 600153041}
   - component: {fileID: 600153042}
+  - component: {fileID: 600153041}
   - component: {fileID: 600153043}
   - component: {fileID: 600153044}
   - component: {fileID: 600153045}
@@ -2369,8 +2369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b42dbade9d5fe4bba24e86539a58ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnAssistant: {fileID: 0}
   _configurationAssistant: {fileID: 0}
+  _spawnAssistant: {fileID: 0}
   _aiAssistant: {fileID: 0}
   _uiAssistant: {fileID: 0}
 --- !u!4 &600153040

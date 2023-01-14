@@ -23,7 +23,7 @@ namespace Ziggurat
         private Transform _greenUnitSpawner;
         private Transform _redUnitSpawner;
 
-        void Start()
+        private void Start()
         {
             _unitsContainer = FindObjectOfType<UnitsContainer>().transform;
 

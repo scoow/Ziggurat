@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 //todo упростить, разделить логику
@@ -12,12 +11,12 @@ namespace Ziggurat
 
         public UnitType _unitType;//тип юнита
 
-        private UnitsStats _stats;
+        private UnitsStats _stats;//базовые статы юнита
+        private float _hp;//текущий показатель hp
 
-        private float _hp;
 
-        private Transform _defaultTarget;
-        private Transform _targetTransform;
+        private Transform _currentTarget;
+
         private Unit _targetUnit;
 
         private UnitMovement _unitMovement;
@@ -39,27 +38,26 @@ namespace Ziggurat
         private float _timer;//время до поиска противника
         private bool _fastAttack;
 
+        private void Awake()
+        {
+            //temp
+            _unitMovement = GetComponent<UnitMovement>();
+
+            _timer = _seekTimeout;
+        }
         private void OnEnable()
         {
-            _defaultTarget = FindObjectOfType<UnitsContainer>().transform;//temp
-            _targetTransform = _defaultTarget;
+            Respawn();
         }
-
-        private void Start()
+        public void Respawn()
         {
-
-            _unitMovement = GetComponent<UnitMovement>();
             _stats = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(_unitType);
-            _timer = _seekTimeout;
-
-            _hp = _stats.Health;//hp
+            _hp = _stats.Health;
 
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
+            _currentTarget = GameManager.instance._aiAssistant.DefaultTarget;
 
-            
-            _targetTransform = _defaultTarget;
-
-            _unitMovement.SetTarget(_targetTransform);
+            _unitMovement.SetTarget(_currentTarget);
         }
         private void Update()
         {
@@ -68,16 +66,16 @@ namespace Ziggurat
             {
                 _timer = _seekTimeout;
                 _targetUnit = TryFindNearestTarget(out bool isSuccess);
-                _targetTransform = _targetUnit.transform;
+                _currentTarget = _targetUnit.transform;
                 if (isSuccess)
                 {
-                    _unitMovement.SetTarget(_targetTransform);
+                    _unitMovement.SetTarget(_currentTarget);
                 }
 
 
-                //Debug.Log(this + "нашел врага" + _targetTransform);
+                //Debug.Log(this + "нашел врага" + _currentTarget);
 
-                if (/*IsEnemy(_targetTransform)*/(Distance(_targetTransform) > 0.1) && TargetInAttackRange(_targetTransform))
+                if (/*IsEnemy(_currentTarget)*/(Distance(_currentTarget) > 0.1) && TargetInAttackRange(_currentTarget))
                 {
                     Attack();
                 }
@@ -86,7 +84,7 @@ namespace Ziggurat
 
         private void Attack()
         {
-            transform.LookAt(_targetTransform);
+            transform.LookAt(_currentTarget);
             float randomChance = UnityEngine.Random.value;
 
             _fastAttack = (randomChance * 100) > _stats.FastOrStrongAttackChance;
@@ -103,7 +101,7 @@ namespace Ziggurat
             }
         }
 
-        public void WeaponTriggerDetected(Weapon weapon)
+        public void WeaponTriggerDetected()
         {
             //Debug.Log("child collided");
             float damage;
@@ -151,10 +149,16 @@ namespace Ziggurat
         public Unit TryFindNearestTarget(out bool isSuccess)
         {
             var result = GameManager.instance._aiAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x) && TargetInSight(x.transform));
+            
             isSuccess = result != null;
 
             if (!isSuccess)//todo убрать заглушку
+            {
+                _currentTarget = GameManager.instance._aiAssistant.DefaultTarget;
+                _unitMovement.SetTarget(_currentTarget);
                 return this;
+            }
+                
 
             return result;
         }
@@ -164,8 +168,7 @@ namespace Ziggurat
         }
         private void Death()
         {
-            _targetUnit= null;
-            _targetTransform = _defaultTarget;
+            //_targetUnit= null;
             _unitMovement.StartAnimation("Die");
             //OnDeath();
         }
