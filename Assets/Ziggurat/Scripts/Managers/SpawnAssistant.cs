@@ -9,11 +9,11 @@ namespace Ziggurat
         /// <summary>
         /// Пул юнитов, разделенных по типу
         /// </summary>
-        public Dictionary<UnitType, UnitPool> _unitPool = new();
+        private Dictionary<UnitType, UnitPool> _unitPool = new();
         /// <summary>
         /// Родительский Transform для хранения юнитов
         /// </summary>
-        public Transform _unitsContainer;
+        private Transform _unitsContainer;
 
         /// <summary>
         /// Список зиккуратов
@@ -44,21 +44,38 @@ namespace Ziggurat
             _unitPool.Add(UnitType.Red, new(Resources.Load<Unit>("Model/RPGHeroPolyart_nav_red"), UnitType.Red, _unitsContainer));
         }
         /// <summary>
-        /// Для теста - спавн на клавиши 1, 2, 3
+        /// Для теста - спавн на клавиши R G B
         /// </summary>
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 _unitPool[UnitType.Blue].GetAviableOrCreateNew(_blueUnitSpawner);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.G))
             {
                 _unitPool[UnitType.Green].GetAviableOrCreateNew(_greenUnitSpawner);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 _unitPool[UnitType.Red].GetAviableOrCreateNew(_redUnitSpawner);
+            }
+        }
+        public void SpawnUnitOfType(UnitType unitType)
+        {
+            switch (unitType)
+            {
+                case UnitType.Blue:
+                    _unitPool[UnitType.Blue].GetAviableOrCreateNew(_blueUnitSpawner);
+                    break;
+                case UnitType.Green:
+                    _unitPool[UnitType.Green].GetAviableOrCreateNew(_greenUnitSpawner);
+                    break;
+                case UnitType.Red:
+                    _unitPool[UnitType.Red].GetAviableOrCreateNew(_redUnitSpawner);
+                    break;
+                default:
+                    break;
             }
         }
     }

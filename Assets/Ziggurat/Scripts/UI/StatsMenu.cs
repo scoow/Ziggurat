@@ -25,12 +25,10 @@ namespace Ziggurat
         private TMP_InputField _CritChanceText;
         [SerializeField]
         private TMP_InputField _FastOrStrongAttackChanceText;
-        [SerializeField]
-
         private void Start()
         {
             _canvas = GetComponent<Canvas>();
-            _canvas.enabled= false;
+            _canvas.enabled = false;
         }
         public void ReadStats(UnitType unitType)
         {
@@ -44,15 +42,13 @@ namespace Ziggurat
         public void Show()
         {
             UpdateStatsMenu();
-
             _canvas.enabled = true;
         }
-
         private void UpdateStatsMenu()
         {
             _UnitTypeText.text = _unitsStatsInMenu.UnitType.ToString();
-            _hpText.text =  _unitsStatsInMenu.Health.ToString();
-            _MovementSpeedText.text =  _unitsStatsInMenu.MovementSpeed.ToString();
+            _hpText.text = _unitsStatsInMenu.Health.ToString();
+            _MovementSpeedText.text = _unitsStatsInMenu.MovementSpeed.ToString();
             _FastAttackDamageText.text = _unitsStatsInMenu.FastAttackDamage.ToString();
             _StrongAttackDamageText.text = _unitsStatsInMenu.StrongAttackDamage.ToString();
             _MissChanceText.text = _unitsStatsInMenu.MissChance.ToString();
@@ -78,7 +74,6 @@ namespace Ziggurat
             {
                 Debug.LogError("Неправильные значения");
             }
-            
         }
     }
 }

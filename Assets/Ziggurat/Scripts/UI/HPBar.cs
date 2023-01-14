@@ -7,18 +7,15 @@ namespace Ziggurat
     public class HPBar : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI _hpText;//todo уменьшение полосы
-        //private HPBarImage _hpBar;
+        private TextMeshProUGUI _hpText;
         private Canvas _canvas;
         [SerializeField]
         private Image _image;
-
         private float _maxHP;
 
         private void OnEnable()
         {
             _canvas = GetComponent<Canvas>();
-           // _hpText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public void SetHP(float value)
@@ -32,7 +29,6 @@ namespace Ziggurat
             _image.fillAmount = 1;
             _hpText.text = _maxHP.ToString();
         }
-
         public void Enable()
         {
             _canvas.enabled = true;

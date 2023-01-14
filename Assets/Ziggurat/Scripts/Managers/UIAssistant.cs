@@ -5,7 +5,8 @@ namespace Ziggurat
 {
     public class UIAssistant : MonoBehaviour
     {
-        public StatsMenu _statsMenu;
+        [SerializeField]
+        private StatsMenu _statsMenu;
         private RectTransform _currentPosition;
         private RectTransform _startPosition;
         private RectTransform _endPosition;
@@ -22,7 +23,7 @@ namespace Ziggurat
         public void OpenMenu(UnitType unitType)
         {
             _statsMenu.ReadStats(unitType);//оптимизировать
-
+            StartCoroutine(nameof(SmoothMenuOpen));
             _statsMenu.Show();
         }
 
