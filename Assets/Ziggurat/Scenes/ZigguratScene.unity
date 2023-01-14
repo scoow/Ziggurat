@@ -3737,10 +3737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b42dbade9d5fe4bba24e86539a58ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configurationAssistant: {fileID: 0}
-  _spawnAssistant: {fileID: 0}
-  _aiAssistant: {fileID: 0}
-  _uiAssistant: {fileID: 0}
 --- !u!4 &600153040
 Transform:
   m_ObjectHideFlags: 0
@@ -3834,6 +3830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6006c99f37b604469ac302bcd30d29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _configuration: {fileID: 11400000, guid: 52072df3b9098b74ca49e92218797764, type: 2}
 --- !u!114 &600153045
 MonoBehaviour:
   m_ObjectHideFlags: 0

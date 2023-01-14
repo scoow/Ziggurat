@@ -13,7 +13,7 @@ namespace Ziggurat
         }
         public void OnPointerDown(PointerEventData eventData)
         {
-            GameManager.instance._uiAssistant.OpenMenu(this._unitSpawner.SpawnerType);
+            GameManager.instance.UIAssistant.OpenMenu(this._unitSpawner.SpawnerType);
         }
     }
 }

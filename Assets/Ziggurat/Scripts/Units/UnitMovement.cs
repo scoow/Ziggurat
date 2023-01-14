@@ -7,7 +7,6 @@ namespace Ziggurat
     public class UnitMovement : MonoBehaviour
     {
         // Положение точки назначения
-        public Transform target;
         private UnitAnimator _unitAnimator;
 
         // Получение компонента агента
@@ -29,21 +28,14 @@ namespace Ziggurat
             _agent.speed = speed;
         }
 
-        public void StartAnimation(string animation)//исправить
+        public void StartAnimation(string animation)//todo исправить
         {
             _unitAnimator.StartAnimation(animation);
         }
 
-        private void Update() //todo анимация при ходьбе
+        private void Update()
         {
-            if (_agent.velocity.magnitude > _agent.speed/10)
-            {
-                _unitAnimator.Moving(_agent.speed);
-            }
-            else
-            {
-                _unitAnimator.Moving(0f);
-            }
+            _unitAnimator.Moving(_agent.velocity.magnitude);
         }
     }
 }

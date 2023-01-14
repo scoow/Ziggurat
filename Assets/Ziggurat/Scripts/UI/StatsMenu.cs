@@ -33,7 +33,7 @@ namespace Ziggurat
         }
         public void ReadStats(UnitType unitType)
         {
-            _unitsStatsInMenu = GameManager.instance._configurationAssistant.ReadCurrentUnitStats(unitType);
+            _unitsStatsInMenu = GameManager.instance.ConfigurationAssistant.ReadCurrentUnitStats(unitType);
         }
 
         public void Hide()
@@ -69,7 +69,7 @@ namespace Ziggurat
                                                  float.Parse(_MissChanceText.text),
                                                  float.Parse(_CritChanceText.text),
                                                  float.Parse(_FastOrStrongAttackChanceText.text));
-            GameManager.instance._configurationAssistant.RewriteCurrentUnitStats(_unitsStatsInMenu.UnitType, newStats);
+            GameManager.instance.ConfigurationAssistant.RewriteCurrentUnitStats(_unitsStatsInMenu.UnitType, newStats);
         }
     }
 }

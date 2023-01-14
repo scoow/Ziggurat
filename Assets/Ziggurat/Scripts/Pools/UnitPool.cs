@@ -15,10 +15,9 @@ namespace Ziggurat
         }
         protected override Unit GetCreated()
         {
-            var result = Object.Instantiate(_prefab); //todo добавить загрузку статов
-            result.UnitType = _unitType;
-            result.Respawn();
-            return result;
+            Unit newUnit = Object.Instantiate(_prefab); //todo добавить загрузку статов
+            newUnit.UnitType = _unitType;
+            return newUnit;
         }
         /// <summary>
         ///  онвертаци€ словар€ в список активных юнитов
@@ -26,7 +25,7 @@ namespace Ziggurat
         /// <returns>список активных юнитов</returns>
         public List<Unit> GetActiveUnits()
         {
-            return _elements.Where(x => x.isActiveAndEnabled).ToList();//todo решить, какой из способов хранени€ списка юнитов использовать
+            return _elements.Where(x => x.isActiveAndEnabled).ToList();
         }
     }
 }

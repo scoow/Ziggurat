@@ -10,6 +10,6 @@ namespace Ziggurat
         {
             _unit = GetComponent<Unit>();
         }
-        public void OnPointerDown(PointerEventData _) => GameManager.instance._uiAssistant.OpenMenu(this._unit.UnitType);
+        public void OnPointerDown(PointerEventData _) => GameManager.instance.UIAssistant.OpenMenu(_unit.UnitType);
     }
 }

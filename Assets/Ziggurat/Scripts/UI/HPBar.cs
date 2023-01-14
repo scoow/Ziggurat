@@ -1,14 +1,12 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ziggurat
 {
     public class HPBar : MonoBehaviour
     {
-        private TextMeshProUGUI _hpText;
+        private TextMeshProUGUI _hpText;//todo уменьшение полосы
         private HPBarImage _hpBar;
-        //private Image 
 
         private void Awake()
         {
@@ -26,7 +24,7 @@ namespace Ziggurat
         }
         private void Update()
         {
-            transform.LookAt(GameManager.instance._cameraController.transform.position);
+            transform.LookAt(GameManager.instance.CameraController.transform.position);
         }
     }
 }
