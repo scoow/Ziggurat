@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-//todo сделать класс для управления движением
 namespace Ziggurat
 {
     [RequireComponent(typeof(NavMeshAgent))]
@@ -9,11 +8,7 @@ namespace Ziggurat
     {
         // Положение точки назначения
         public Transform target;
-
-        [SerializeField]
-        //private float _attackDistance = 2;
-
-        private UnitEnvironment _unitEnvironment;
+        private UnitAnimator _unitAnimator;
 
         // Получение компонента агента
         private UnityEngine.AI.NavMeshAgent _agent;
@@ -21,7 +16,7 @@ namespace Ziggurat
         private void Awake()
         {
             _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-            _unitEnvironment = GetComponent<UnitEnvironment>();
+            _unitAnimator = GetComponent<UnitAnimator>();
         }
 
         public void SetTarget(Transform target)
@@ -36,18 +31,18 @@ namespace Ziggurat
 
         public void StartAnimation(string animation)//исправить
         {
-            _unitEnvironment.StartAnimation(animation);
+            _unitAnimator.StartAnimation(animation);
         }
 
         private void Update() //todo анимация при ходьбе
         {
-            if (_agent.velocity.magnitude > 1)
+            if (_agent.velocity.magnitude > _agent.speed/10)
             {
-                _unitEnvironment.Moving(_agent.speed);
+                _unitAnimator.Moving(_agent.speed);
             }
             else
             {
-                _unitEnvironment.Moving(0f);
+                _unitAnimator.Moving(0f);
             }
         }
     }

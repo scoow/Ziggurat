@@ -9,7 +9,6 @@ namespace Ziggurat
         private RectTransform _currentPosition;
         private RectTransform _startPosition;
         private RectTransform _endPosition;
-
         private void Start()
         {
             _statsMenu= FindObjectOfType<StatsMenu>();

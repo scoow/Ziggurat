@@ -46,14 +46,14 @@ namespace Ziggurat
 
         public void UpdateStatsMenu()
         {
-            _UnitTypeText.text = "UnitType " + _unitsStats.UnitType;
-            _hpText.text = "Health " + _unitsStats.Health;
-            _MovementSpeedText.text = "MovementSpeed " + _unitsStats.MovementSpeed;
-            _FastAttackDamageText.text = "FastAttackDamage " + _unitsStats.FastAttackDamage;
-            _StrongAttackDamageText.text = "StrongAttackDamage " + _unitsStats.StrongAttackDamage;
-            _MissChanceText.text = "MissChance " + _unitsStats.MissChance;
-            _CritChanceText.text = "CritChance " + _unitsStats.CritChance;
-            _FastOrStrongAttackChanceText.text = "FastOrStrongAttackChance " + _unitsStats.FastOrStrongAttackChance;
+            _UnitTypeText.text = _unitsStats.UnitType.ToString();
+            _hpText.text =  _unitsStats.Health.ToString();
+            _MovementSpeedText.text =  _unitsStats.MovementSpeed.ToString();
+            _FastAttackDamageText.text = _unitsStats.FastAttackDamage.ToString();
+            _StrongAttackDamageText.text = _unitsStats.StrongAttackDamage.ToString();
+            _MissChanceText.text = _unitsStats.MissChance.ToString();
+            _CritChanceText.text = _unitsStats.CritChance.ToString();
+            _FastOrStrongAttackChanceText.text = _unitsStats.FastOrStrongAttackChance.ToString();
         }
     }
 }

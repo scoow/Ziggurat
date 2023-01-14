@@ -13,9 +13,6 @@ namespace Ziggurat
             _unitType = unitType;
             Init(count);
         }
-
-
-
         protected override Unit GetCreated()
         {
             var result = Object.Instantiate(_prefab); //todo добавить загрузку статов

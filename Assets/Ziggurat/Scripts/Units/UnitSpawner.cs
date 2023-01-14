@@ -7,11 +7,5 @@ namespace Ziggurat
         [SerializeField]
         private UnitType _spawnerType;
         public UnitType SpawnerType => _spawnerType;
-
-        private UnitsStats _stats;
-
-        private float _respawnCoolDown;
-
     }
-
 }

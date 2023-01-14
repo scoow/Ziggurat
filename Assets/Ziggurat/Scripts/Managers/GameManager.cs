@@ -35,7 +35,7 @@ namespace Ziggurat
         public ConfigurationAssistant _configurationAssistant;
         public SpawnAssistant _spawnAssistant;
         
-        public AIAssistant _aiAssistant;//
+        public AIAssistant _aiAssistant;
         public UIAssistant _uiAssistant;
 
         private void Awake()
