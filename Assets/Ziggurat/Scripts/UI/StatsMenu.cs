@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ziggurat
 {
@@ -9,21 +10,21 @@ namespace Ziggurat
         private Canvas _canvas;
 
         [SerializeField]
-        private TextMeshProUGUI _UnitTypeText;
+        private TMP_InputField _UnitTypeText;
         [SerializeField]
-        private TextMeshProUGUI _hpText;
+        private TMP_InputField _hpText;
         [SerializeField]
-        private TextMeshProUGUI _MovementSpeedText;
+        private TMP_InputField _MovementSpeedText;
         [SerializeField]
-        private TextMeshProUGUI _FastAttackDamageText;
+        private TMP_InputField _FastAttackDamageText;
         [SerializeField]
-        private TextMeshProUGUI _StrongAttackDamageText;
+        private TMP_InputField _StrongAttackDamageText;
         [SerializeField]
-        private TextMeshProUGUI _MissChanceText;
+        private TMP_InputField _MissChanceText;
         [SerializeField]
-        private TextMeshProUGUI _CritChanceText;
+        private TMP_InputField _CritChanceText;
         [SerializeField]
-        private TextMeshProUGUI _FastOrStrongAttackChanceText;
+        private TMP_InputField _FastOrStrongAttackChanceText;
         [SerializeField]
 
         private void Start()
@@ -54,6 +55,18 @@ namespace Ziggurat
             _MissChanceText.text = _unitsStats.MissChance.ToString();
             _CritChanceText.text = _unitsStats.CritChance.ToString();
             _FastOrStrongAttackChanceText.text = _unitsStats.FastOrStrongAttackChance.ToString();
+        }
+        private void OnValueChanged()//event
+        {
+            UnitsStats newStats = new(_unitsStats.UnitType,
+                                                 float.Parse(_hpText.text),
+                                                 float.Parse(_MovementSpeedText.text),
+                                                 float.Parse(_FastAttackDamageText.text),
+                                                 float.Parse(_StrongAttackDamageText.text),
+                                                 float.Parse(_MissChanceText.text),
+                                                 float.Parse(_CritChanceText.text),
+                                                 float.Parse(_FastOrStrongAttackChanceText.text));
+            GameManager.instance._configurationAssistant.RewriteCurrentUnitStats(_unitsStats.UnitType, newStats);
         }
     }
 }
