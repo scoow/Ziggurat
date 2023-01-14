@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ziggurat
@@ -7,20 +8,22 @@ namespace Ziggurat
     {
         private TextMeshProUGUI _hpText;//todo уменьшение полосы
         private HPBarImage _hpBar;
+        private Canvas _canvas;
 
         private void Awake()
         {
+            _canvas = GetComponent<Canvas>();
             _hpBar = GetComponentInChildren<HPBarImage>();
             _hpText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public void Enable()
         {
-            this.enabled = true;
+            _canvas.enabled = true;
         }
         public void Disable()
         {
-            this.enabled = false;
+            _canvas.enabled = false;
         }
         private void Update()
         {

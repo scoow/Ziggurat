@@ -28,7 +28,7 @@ namespace Ziggurat
             _agent.speed = speed;
         }
 
-        public void StartAnimation(string animation)//todo исправить
+        public void StartAnimation(string animation)
         {
             _unitAnimator.StartAnimation(animation);
         }

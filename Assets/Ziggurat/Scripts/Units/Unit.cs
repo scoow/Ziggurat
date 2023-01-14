@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-//todo упростить, разделить логику
 namespace Ziggurat
 {
     public class Unit : MonoBehaviour
@@ -70,26 +69,21 @@ namespace Ziggurat
                     _unitMovement.SetTarget(_currentTarget);
                 }
 
-                if (/*IsEnemy(_currentTarget)*/(Distance(_currentTarget) > 0.1) && TargetInAttackRange(_currentTarget))
+                if (TargetInAttackRange(_currentTarget))
                 {
                     Attack();
                 }
             }
         }
-
         private void Attack()
         {
             transform.LookAt(_currentTarget);
             float randomChance = UnityEngine.Random.value;
             _fastAttack = (randomChance * 100) > _stats.FastOrStrongAttackChance;
             if (_fastAttack)
-            {
                 _unitMovement.StartAnimation(GameManager.instance.AnimationAssistant.AnimationByName(AnimationType.FastAttack));
-            }
             else
-            {
                 _unitMovement.StartAnimation(GameManager.instance.AnimationAssistant.AnimationByName(AnimationType.StrongAttack));
-            }
         }
 
         public void WeaponTriggerDetected()
@@ -114,7 +108,7 @@ namespace Ziggurat
             if (_hp <= 0)
                 Death();
         }
-        private bool TargetInSight(Transform target)//
+        private bool TargetInSight(Transform target)
         {
             return Distance(target.transform) < _sightDistance;
         }
@@ -131,12 +125,6 @@ namespace Ziggurat
         {
             var result = GameManager.instance.AIAssistant.GetAllUnits().OrderBy(x => Distance(x.transform)).FirstOrDefault(x => IsEnemy(x) && TargetInSight(x.transform));
             isSuccess = result != null;
-            if (!isSuccess)//todo убрать заглушку
-            {
-                /*_currentTarget = GameManager.instance.AIAssistant.DefaultTarget;
-                _unitMovement.SetTarget(_currentTarget);*/
-                return null;
-            }
             return result;
         }
         private bool IsEnemy(Unit target)
@@ -145,14 +133,8 @@ namespace Ziggurat
         }
         public void Death()
         {
-            //_targetUnit= null;
             _unitMovement.StartAnimation("Die");
             //OnDeath();
         }
-
     }
-    /*_nearestEnemy.GetComponent<EnemyController>().OnWinerMessage += AtackNearestEnemy;
-        transform.LookAt(_nearestEnemy.transform);       
-
-        return _nearestEnemy;*/
 }

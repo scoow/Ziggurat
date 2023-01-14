@@ -15,7 +15,7 @@ namespace Ziggurat
         }
         protected override Unit GetCreated()
         {
-            Unit newUnit = Object.Instantiate(_prefab); //todo добавить загрузку статов
+            Unit newUnit = Object.Instantiate(_prefab);
             newUnit.UnitType = _unitType;
             return newUnit;
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Ziggurat
@@ -7,6 +8,7 @@ namespace Ziggurat
     {
         private List<Unit> _activeUnits;
         private Transform _defaultTarget;
+        private bool _hpBarEnabled = true;
         public Transform DefaultTarget => _defaultTarget;
 
         private void Awake()
@@ -31,10 +33,10 @@ namespace Ziggurat
 
         public List<Unit> GetAllUnits()
         {
-            CreateListOfActiveUnitsInPool();//todo событие при создании юнита в пуле или при смерти
+            CreateListOfActiveUnitsInPool();
             return _activeUnits;
         }
-        public void KillAll()
+        public void KillAll_EDITOR()
         {
             CreateListOfActiveUnitsInPool();
             foreach (Unit unit in _activeUnits)
@@ -42,6 +44,17 @@ namespace Ziggurat
                 unit.Death();
             }
             _activeUnits.Clear();
+        }
+        public void ShowOrHideHPBar_EDITOR()
+        {
+            foreach (HPBar hPBar in FindObjectsOfType<HPBar>().ToList())
+            {
+                if (_hpBarEnabled)
+                    hPBar.Disable();                  
+                else
+                    hPBar.Enable();
+            }
+            _hpBarEnabled = !_hpBarEnabled;
         }
     }
 }
