@@ -46,7 +46,7 @@ namespace Ziggurat
         [SerializeField] private float _fastOrStrongAttackChance;
         public float FastOrStrongAttackChance => _fastOrStrongAttackChance;
 
-        public UnitsStats(UnitType unitType, float health, float movementSpeed, float fastAttackDamage, float strongAttackDamage, float missChance, float critChance, float fastOrStrongAttackChance)
+        public void Init(UnitType unitType, float health, float movementSpeed, float fastAttackDamage, float strongAttackDamage, float missChance, float critChance, float fastOrStrongAttackChance)
         {
             _unitType= unitType;
             _health= health;

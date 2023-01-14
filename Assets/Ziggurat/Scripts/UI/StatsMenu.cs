@@ -31,7 +31,7 @@ namespace Ziggurat
         {
             _canvas = GetComponent<Canvas>();
             //убрать меню при старте игры
-           
+            _canvas.enabled= false;
         }
 
         public void ReadStats(UnitType unitType)
@@ -56,9 +56,10 @@ namespace Ziggurat
             _CritChanceText.text = _unitsStats.CritChance.ToString();
             _FastOrStrongAttackChanceText.text = _unitsStats.FastOrStrongAttackChance.ToString();
         }
-        private void OnValueChanged()//event
+        public void OnValueChanged_EDITOR()
         {
-            UnitsStats newStats = new(_unitsStats.UnitType,
+            UnitsStats newStats = ScriptableObject.CreateInstance<UnitsStats>();
+            newStats.Init(_unitsStats.UnitType,
                                                  float.Parse(_hpText.text),
                                                  float.Parse(_MovementSpeedText.text),
                                                  float.Parse(_FastAttackDamageText.text),

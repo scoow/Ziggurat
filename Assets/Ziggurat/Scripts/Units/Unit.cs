@@ -166,7 +166,7 @@ namespace Ziggurat
         {
             return target._unitType != this._unitType;
         }
-        private void Death()
+        public void Death()
         {
             //_targetUnit= null;
             _unitMovement.StartAnimation("Die");

@@ -21,7 +21,7 @@ namespace Ziggurat
         }
         public void OpenMenu(UnitType unitType)
         {
-            _statsMenu.ReadStats(unitType);//рптимизировать
+            _statsMenu.ReadStats(unitType);//оптимизировать
             _statsMenu.HideOrShow();
         }
 

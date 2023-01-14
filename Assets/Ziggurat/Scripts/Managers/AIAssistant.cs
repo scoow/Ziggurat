@@ -34,5 +34,15 @@ namespace Ziggurat
             CreateListOfActiveUnitsInPool();//todo событие при создании юнита в пуле или при смерти
             return _activeUnits;
         }
+        public void KillAll()
+        {
+            CreateListOfActiveUnitsInPool();
+            foreach (Unit unit in _activeUnits)
+            {
+                unit.Death();
+            }
+
+            _activeUnits.Clear();
+        }
     }
 }
