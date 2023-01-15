@@ -109,9 +109,12 @@ namespace Ziggurat
         public void TakeDamage(float damage)
         {
             _hp -= damage;
-            _hpBar.SetHP(_hp);
             if (_hp <= 0)
+            {
+                _hp = 0;
                 Death();
+            }
+            _hpBar.SetHP(_hp);
         }
         private bool TargetInSight(Transform target)
         {
