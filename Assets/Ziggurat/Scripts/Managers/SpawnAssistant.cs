@@ -29,9 +29,9 @@ namespace Ziggurat
             _unitsContainer = FindObjectOfType<UnitsContainer>().transform;
 
             _unitSpawners = FindObjectsOfType<UnitSpawner>().ToList();
-            _blueUnitSpawner = _unitSpawners.First(x => x.SpawnerType == UnitType.Blue).transform;
-            _greenUnitSpawner = _unitSpawners.First(x => x.SpawnerType == UnitType.Green).transform;
-            _redUnitSpawner = _unitSpawners.First(x => x.SpawnerType == UnitType.Red).transform;
+            _blueUnitSpawner = _unitSpawners.First(x => x.UnitType == UnitType.Blue).transform;
+            _greenUnitSpawner = _unitSpawners.First(x => x.UnitType == UnitType.Green).transform;
+            _redUnitSpawner = _unitSpawners.First(x => x.UnitType == UnitType.Red).transform;
 
             InitUnitsPools();
         }

@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6506346257786070790, guid: 2540e234ac4d86340be8f01ac7c0684c, type: 3}
+      propertyPath: _unitType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7067149713189664400, guid: 2540e234ac4d86340be8f01ac7c0684c, type: 3}
       propertyPath: m_Name
       value: RPGHeroPolyart_nav_green

@@ -9,16 +9,6 @@ namespace Ziggurat
 		StrongAttack = 2,
 		Die = 3
 	}
-
-	[System.Flags]
-	public enum IgnoreAxisType : byte
-	{
-		None = 0,
-		X = 1,
-		Y = 2,
-		Z = 4
-	}
-
 	[System.Serializable]
 	public class AnimationKeyDictionary : SerializableDictionaryBase<AnimationType, string> { }
 }

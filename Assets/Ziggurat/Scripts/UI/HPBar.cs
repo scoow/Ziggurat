@@ -12,12 +12,10 @@ namespace Ziggurat
         [SerializeField]
         private Image _image;
         private float _maxHP;
-
         private void OnEnable()
         {
             _canvas = GetComponent<Canvas>();
         }
-
         public void SetHP(float value)
         {
             _hpText.text = value.ToString();

@@ -1,15 +1,11 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 namespace Ziggurat
 {
-    public class UnitUI : MonoBehaviour, IPointerDownHandler
+    public class UnitUI : ClickHandler<Unit>
     {
-        private Unit _unit;
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _unit = GetComponent<Unit>();
+            base.OnEnable();
+            _unitType = _object.UnitType;
         }
-        public void OnPointerDown(PointerEventData eventData) => GameManager.instance.UIAssistant.OpenMenu(_unit.UnitType);
     }
 }

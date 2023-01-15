@@ -9,7 +9,6 @@ namespace Ziggurat
     public class StatsMenu : MonoBehaviour
     {
         private UnitsStats _unitsStatsInMenu;
-        private Canvas _canvas;
         private Image _image;
         private Vector3 _startPosition;
         private Vector3 _endPosition;
@@ -32,11 +31,9 @@ namespace Ziggurat
         private TMP_InputField _FastOrStrongAttackChanceText;
         private void Start()
         {
-            _canvas = GetComponent<Canvas>();
             _image = GetComponentInChildren<Image>();
             _startPosition = _image.rectTransform.position;
-            _endPosition = _startPosition;
-            _endPosition += new Vector3(0f, -_image.rectTransform.sizeDelta.y, 0f);
+            _endPosition = _startPosition + new Vector3(0f, _image.rectTransform.sizeDelta.y, 0f);
         }
         public void ReadStats(UnitType unitType)
         {
@@ -45,11 +42,12 @@ namespace Ziggurat
 
         public void Hide()
         {
-            StartCoroutine(SmoothMenuOpen(_startPosition, _endPosition, 2f));
+            StartCoroutine(SmoothMenuOpen(_endPosition, _startPosition, 2f));
         }
         public void Show()
         {
-            StartCoroutine(SmoothMenuOpen(_endPosition, _startPosition, 2f));
+            StartCoroutine(SmoothMenuOpen(_startPosition, _endPosition, 2f));
+           
             UpdateStatsMenu();
         }
         private void UpdateStatsMenu()
@@ -83,7 +81,7 @@ namespace Ziggurat
                 Debug.LogError("Неправильные значения");
             }
         }
-        public IEnumerator SmoothMenuOpen(Vector3 startPosition, Vector3 endPosition, float time)
+        private IEnumerator SmoothMenuOpen(Vector3 startPosition, Vector3 endPosition, float time)
         {
             float currentTime = 0f;
 
