@@ -23,21 +23,8 @@ namespace Ziggurat
         public void OpenMenu(UnitType unitType)
         {
             _statsMenu.ReadStats(unitType);//оптимизировать
-            StartCoroutine(nameof(SmoothMenuOpen));
+            //StartCoroutine(nameof(SmoothMenuOpen));
             _statsMenu.Show();
-        }
-
-        public IEnumerator SmoothMenuOpen()
-        {
-            float currentTime = 0f;
-
-            while (currentTime < 2)
-            {
-                _currentPosition.transform.position = Vector3.Lerp(_startPosition.position, _endPosition.position, currentTime);
-                currentTime += Time.deltaTime;
-                yield return null;
-            }
-            _currentPosition.transform.position = _endPosition.position;
         }
     }
 }

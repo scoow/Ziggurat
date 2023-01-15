@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ziggurat
 {
@@ -8,6 +10,9 @@ namespace Ziggurat
     {
         private UnitsStats _unitsStatsInMenu;
         private Canvas _canvas;
+        private Image _image;
+        private Vector3 _startPosition;
+        private Vector3 _endPosition;
 
         [SerializeField]
         private TMP_InputField _UnitTypeText;
@@ -28,7 +33,10 @@ namespace Ziggurat
         private void Start()
         {
             _canvas = GetComponent<Canvas>();
-            _canvas.enabled = false;
+            _image = GetComponentInChildren<Image>();
+            _startPosition = _image.rectTransform.position;
+            _endPosition = _startPosition;
+            _endPosition += new Vector3(0f, -_image.rectTransform.sizeDelta.y, 0f);
         }
         public void ReadStats(UnitType unitType)
         {
@@ -37,12 +45,12 @@ namespace Ziggurat
 
         public void Hide()
         {
-            _canvas.enabled = false;
+            StartCoroutine(SmoothMenuOpen(_startPosition, _endPosition, 2f));
         }
         public void Show()
         {
+            StartCoroutine(SmoothMenuOpen(_endPosition, _startPosition, 2f));
             UpdateStatsMenu();
-            _canvas.enabled = true;
         }
         private void UpdateStatsMenu()
         {
@@ -74,6 +82,18 @@ namespace Ziggurat
             {
                 Debug.LogError("Неправильные значения");
             }
+        }
+        public IEnumerator SmoothMenuOpen(Vector3 startPosition, Vector3 endPosition, float time)
+        {
+            float currentTime = 0f;
+
+            while (currentTime < time)
+            {
+                _image.transform.position = Vector3.Lerp(startPosition, endPosition, currentTime / time);
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+            _image.transform.position = endPosition;
         }
     }
 }
