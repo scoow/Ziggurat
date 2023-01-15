@@ -35,6 +35,7 @@ namespace Ziggurat
         private bool _fastAttack;
 
         private HPBar _hpBar;
+        public HPBar HPBar => _hpBar;
 
         private void Awake()
         {
@@ -53,7 +54,10 @@ namespace Ziggurat
             _unitMovement.SetSpeed(_stats.MovementSpeed);//передаём скорость из статистики в навмеш
             _currentTarget = GameManager.instance.AIAssistant.DefaultTarget;
             _unitMovement.SetTarget(_currentTarget);
+
             _hpBar.SetMaxHP(_hp);
+
+            GameManager.instance.AIAssistant.AddUnitToList(this);
         }
         private void Update()
         {
@@ -141,8 +145,9 @@ namespace Ziggurat
         }
         public void Death()
         {
+            _unitMovement.StopMoving();
             _unitMovement.StartAnimation("Die");
-            //OnDeath();
+            GameManager.instance.AIAssistant.RemoveUnitFromList(this);
         }
     }
 }

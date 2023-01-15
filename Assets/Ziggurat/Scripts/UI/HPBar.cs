@@ -12,9 +12,10 @@ namespace Ziggurat
         [SerializeField]
         private Image _image;
         private float _maxHP;
-        private void OnEnable()
+        private void Awake()
         {
             _canvas = GetComponent<Canvas>();
+            _canvas.enabled = GameManager.instance.AIAssistant.HPBarEnabled;
         }
         public void SetHP(float value)
         {

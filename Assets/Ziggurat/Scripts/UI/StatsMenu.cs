@@ -29,17 +29,35 @@ namespace Ziggurat
         private TMP_InputField _CritChanceText;
         [SerializeField]
         private TMP_InputField _FastOrStrongAttackChanceText;
+
+        [SerializeField]
+        private Button _killAllButton;
+        [SerializeField]
+        private Button _hideOrShowHPBarButton;
+        [SerializeField]
+        private Button _closeButton;
         private void Start()
         {
             _image = GetComponentInChildren<Image>();
             _startPosition = _image.rectTransform.position;
             _endPosition = _startPosition + new Vector3(0f, _image.rectTransform.sizeDelta.y, 0f);
+
+            _hpText.onEndEdit.AddListener(OnValueChanged);
+            _MovementSpeedText.onEndEdit.AddListener(OnValueChanged);
+            _FastAttackDamageText.onEndEdit.AddListener(OnValueChanged);
+            _StrongAttackDamageText.onEndEdit.AddListener(OnValueChanged);
+            _MissChanceText.onEndEdit.AddListener(OnValueChanged);
+            _CritChanceText.onEndEdit.AddListener(OnValueChanged);
+            _FastOrStrongAttackChanceText.onEndEdit.AddListener(OnValueChanged);
+
+            _killAllButton.onClick.AddListener(GameManager.instance.AIAssistant.KillAll);
+            _closeButton.onClick.AddListener(Hide);
+            _hideOrShowHPBarButton.onClick.AddListener(GameManager.instance.AIAssistant.ShowOrHideHPBar);
         }
         public void ReadStats(UnitType unitType)
         {
             _unitsStatsInMenu = GameManager.instance.ConfigurationAssistant.ReadCurrentUnitStats(unitType);
         }
-
         public void Hide()
         {
             StartCoroutine(SmoothMenuOpen(_endPosition, _startPosition, 2f));
@@ -61,7 +79,7 @@ namespace Ziggurat
             _CritChanceText.text = _unitsStatsInMenu.CritChance.ToString();
             _FastOrStrongAttackChanceText.text = _unitsStatsInMenu.FastOrStrongAttackChance.ToString();
         }
-        public void OnValueChanged_EDITOR()
+        private void OnValueChanged(string arg)
         {
             try
             {

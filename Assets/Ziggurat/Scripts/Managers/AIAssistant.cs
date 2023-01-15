@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Ziggurat
@@ -9,26 +8,22 @@ namespace Ziggurat
         private List<Unit> _activeUnits;
         private Transform _defaultTarget;
         public Transform DefaultTarget => _defaultTarget;
-        private bool _hpBarEnabled = true;
+        private bool _hpBarEnabled;
+        public bool HPBarEnabled => _hpBarEnabled;
 
         private void Awake()
         {
             _defaultTarget = FindObjectOfType<UnitsContainer>().transform;
-        }
-
-        private void Start()
-        {
             _activeUnits = new List<Unit>();
-            CreateListOfActiveUnitsInPool();
+            _hpBarEnabled = false;
         }
-        /// <summary>
-        /// Добавление живых активных юнитов в список
-        /// </summary>
-        private void CreateListOfActiveUnitsInPool()
+        public void AddUnitToList(Unit unit)
         {
-            _activeUnits = GameManager.instance.SpawnAssistant.UnitPool[UnitType.Blue].GetActiveUnits();
-            _activeUnits.AddRange(GameManager.instance.SpawnAssistant.UnitPool[UnitType.Green].GetActiveUnits());
-            _activeUnits.AddRange(GameManager.instance.SpawnAssistant.UnitPool[UnitType.Red].GetActiveUnits());
+            _activeUnits.Add(unit);
+        }
+        public void RemoveUnitFromList(Unit unit)
+        {
+            _activeUnits.Remove(unit);
         }
         /// <summary>
         /// Получение списка активных юнитов
@@ -36,32 +31,31 @@ namespace Ziggurat
         /// <returns>список</returns>
         public List<Unit> GetAllUnits()
         {
-            CreateListOfActiveUnitsInPool();
             return _activeUnits;
         }
         /// <summary>
         /// Убить всех юнитов
         /// </summary>
-        public void KillAll_EDITOR()
+        public void KillAll()
         {
-            CreateListOfActiveUnitsInPool();
-            foreach (Unit unit in _activeUnits)
+            List<Unit> units = new(_activeUnits);
+            foreach (Unit unit in units)
             {
                 unit.Death();
             }
-            _activeUnits.Clear();
         }
         /// <summary>
         /// Показать или скрыть полоску HP
         /// </summary>
-        public void ShowOrHideHPBar_EDITOR()
+        public void ShowOrHideHPBar()
         {
-            foreach (HPBar hPBar in FindObjectsOfType<HPBar>().ToList())
+            List<Unit> units = new(_activeUnits);
+            foreach (Unit unit in units)
             {
                 if (_hpBarEnabled)
-                    hPBar.Disable();                  
+                    unit.HPBar.Disable();
                 else
-                    hPBar.Enable();
+                    unit.HPBar.Enable();
             }
             _hpBarEnabled = !_hpBarEnabled;
         }

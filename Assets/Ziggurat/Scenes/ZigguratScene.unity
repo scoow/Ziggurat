@@ -635,19 +635,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -893,19 +881,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -2170,19 +2146,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -3006,19 +2970,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 495861594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &495861594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5217,19 +5169,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -5728,19 +5668,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 882685769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 600153043}
-        m_TargetAssemblyTypeName: Ziggurat.AIAssistant, Assembly-CSharp
-        m_MethodName: KillAll_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &882685769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6390,7 +6318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a49359c2e1eaa24dbf048b63c526f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitType: 2
 --- !u!114 &1010354915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6961,19 +6888,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -7655,19 +7570,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -7843,19 +7746,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1368177447}
-        m_TargetAssemblyTypeName: Ziggurat.StatsMenu, Assembly-CSharp
-        m_MethodName: OnValueChanged_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -8754,6 +8645,9 @@ MonoBehaviour:
   _MissChanceText: {fileID: 326176882}
   _CritChanceText: {fileID: 1181240717}
   _FastOrStrongAttackChanceText: {fileID: 1215107229}
+  _killAllButton: {fileID: 882685768}
+  _hideOrShowHPBarButton: {fileID: 1464273500}
+  _closeButton: {fileID: 495861593}
 --- !u!1 &1376267470
 GameObject:
   m_ObjectHideFlags: 0
@@ -9531,19 +9425,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1464273501}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 600153043}
-        m_TargetAssemblyTypeName: Ziggurat.AIAssistant, Assembly-CSharp
-        m_MethodName: ShowOrHideHPBar_EDITOR
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1464273501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10302,7 +10184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a49359c2e1eaa24dbf048b63c526f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitType: 0
 --- !u!114 &1617742202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12449,7 +12330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a49359c2e1eaa24dbf048b63c526f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitType: 1
 --- !u!114 &2096191722
 MonoBehaviour:
   m_ObjectHideFlags: 0
