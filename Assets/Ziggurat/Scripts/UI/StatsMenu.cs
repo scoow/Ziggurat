@@ -1,13 +1,17 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ziggurat
 {
     public class StatsMenu : MonoBehaviour
     {
         private UnitsStats _unitsStatsInMenu;
-        private Canvas _canvas;
+        private Image _image;
+        private Vector3 _startPosition;
+        private Vector3 _endPosition;
 
         [SerializeField]
         private TMP_InputField _UnitTypeText;
@@ -25,24 +29,44 @@ namespace Ziggurat
         private TMP_InputField _CritChanceText;
         [SerializeField]
         private TMP_InputField _FastOrStrongAttackChanceText;
+
+        [SerializeField]
+        private Button _killAllButton;
+        [SerializeField]
+        private Button _hideOrShowHPBarButton;
+        [SerializeField]
+        private Button _closeButton;
         private void Start()
         {
-            _canvas = GetComponent<Canvas>();
-            _canvas.enabled = false;
+            _image = GetComponentInChildren<Image>();
+            _startPosition = _image.rectTransform.position;
+            _endPosition = _startPosition + new Vector3(0f, _image.rectTransform.sizeDelta.y, 0f);
+
+            _hpText.onEndEdit.AddListener(OnValueChanged);
+            _MovementSpeedText.onEndEdit.AddListener(OnValueChanged);
+            _FastAttackDamageText.onEndEdit.AddListener(OnValueChanged);
+            _StrongAttackDamageText.onEndEdit.AddListener(OnValueChanged);
+            _MissChanceText.onEndEdit.AddListener(OnValueChanged);
+            _CritChanceText.onEndEdit.AddListener(OnValueChanged);
+            _FastOrStrongAttackChanceText.onEndEdit.AddListener(OnValueChanged);
+
+            _killAllButton.onClick.AddListener(GameManager.instance.AIAssistant.KillAll);
+            _closeButton.onClick.AddListener(Hide);
+            _hideOrShowHPBarButton.onClick.AddListener(GameManager.instance.AIAssistant.ShowOrHideHPBar);
         }
         public void ReadStats(UnitType unitType)
         {
             _unitsStatsInMenu = GameManager.instance.ConfigurationAssistant.ReadCurrentUnitStats(unitType);
         }
-
         public void Hide()
         {
-            _canvas.enabled = false;
+            StartCoroutine(SmoothMenuOpen(_endPosition, _startPosition, 2f));
         }
         public void Show()
         {
+            StartCoroutine(SmoothMenuOpen(_startPosition, _endPosition, 2f));
+           
             UpdateStatsMenu();
-            _canvas.enabled = true;
         }
         private void UpdateStatsMenu()
         {
@@ -55,7 +79,7 @@ namespace Ziggurat
             _CritChanceText.text = _unitsStatsInMenu.CritChance.ToString();
             _FastOrStrongAttackChanceText.text = _unitsStatsInMenu.FastOrStrongAttackChance.ToString();
         }
-        public void OnValueChanged_EDITOR()
+        private void OnValueChanged(string arg)
         {
             try
             {
@@ -74,6 +98,18 @@ namespace Ziggurat
             {
                 Debug.LogError("Неправильные значения");
             }
+        }
+        private IEnumerator SmoothMenuOpen(Vector3 startPosition, Vector3 endPosition, float time)
+        {
+            float currentTime = 0f;
+
+            while (currentTime < time)
+            {
+                _image.transform.position = Vector3.Lerp(startPosition, endPosition, currentTime / time);
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+            _image.transform.position = endPosition;
         }
     }
 }

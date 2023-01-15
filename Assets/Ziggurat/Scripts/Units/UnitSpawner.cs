@@ -5,8 +5,8 @@ namespace Ziggurat
     public class UnitSpawner : MonoBehaviour
     {
         [SerializeField]
-        private UnitType _spawnerType;
-        public UnitType SpawnerType => _spawnerType;
+        private UnitType _unitType;
+        public UnitType UnitType => _unitType;
         [SerializeField]
         private float _spawnCooldown;
         private float _spawnTime = 0;
@@ -21,7 +21,7 @@ namespace Ziggurat
             if (_spawnTime < 0)
             {
                 _spawnTime = _spawnCooldown;
-                GameManager.instance.SpawnAssistant.SpawnUnitOfType(_spawnerType);
+                GameManager.instance.SpawnAssistant.SpawnUnitOfType(_unitType);
             }
         }
     }

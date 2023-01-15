@@ -41,6 +41,11 @@ namespace Ziggurat
         {
             _unitAnimator.StartAnimation(animation);
         }
+
+        public void StopMoving()
+        {
+            _unitAnimator.Moving(0f);
+        }
         /// <summary>
         /// »змерение ускорени€ дл€ определени€ анимации бега
         /// </summary>
