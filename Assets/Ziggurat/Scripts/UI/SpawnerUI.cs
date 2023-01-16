@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 namespace Ziggurat
 {
     public class SpawnerUI : ClickHandler<UnitSpawner>

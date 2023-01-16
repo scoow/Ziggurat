@@ -7,8 +7,12 @@ namespace Ziggurat
     {
         //public Event OnDeath;
         [SerializeField]
-        private UnitType _unitType;//тип юнита
-        public UnitType UnitType { get; set; }
+        private UnitType _unitType;
+        public UnitType UnitType
+        {
+            get { return _unitType; }
+            set { _unitType = value; }
+        }
 
         private UnitsStats _stats;//базовые статы юнита
         private float _hp;//текущий показатель hp
